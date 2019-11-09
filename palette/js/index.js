@@ -6,7 +6,6 @@ const pixelInput = document.querySelector('#pixel-size');
 const fillDefault = document.querySelector('#default');
 const colorTools = document.querySelector('.color-tools__list');
 const canvas = document.querySelector('#canvas');
-
 const ctx = canvas.getContext('2d');
 
 function canvasToDefault() {
@@ -27,18 +26,28 @@ function canvasToDefault() {
     });
 }
 
-canvasToDefault();
+if (localStorage.getItem('isFull')) {
+  const dataURL = localStorage.getItem('canvasData');
+  const img = new Image();
+  img.src = dataURL;
+  img.onload = () => {
+    ctx.drawImage(img, 0, 0);
+  };
+} else {
+  canvasToDefault();
+}
 
-let pixelSize = pixelInput.value;
-let isBucket = true;
-let isPicker = false;
-let isPencil = false;
-let currentColor = 'rgb(173, 255, 47)';
-let previousColor = 'rgb(128, 128, 128)';
+let isBucket = localStorage.getItem('isFull') ? JSON.parse(localStorage.getItem('isBucket')) : false;
+let isPicker = localStorage.getItem('isFull') ? JSON.parse(localStorage.getItem('isPicker')) : false;
+let isPencil = localStorage.getItem('isFull') ? JSON.parse(localStorage.getItem('isPencil')) : true;
+let currentColor = localStorage.getItem('isFull') ? localStorage.getItem('currentColor') : 'rgb(173, 255, 47)';
+let previousColor = localStorage.getItem('isFull') ? localStorage.getItem('previousColor') : 'rgb(128, 128, 128)';
+let pixelSize = localStorage.getItem('isFull') ? +localStorage.getItem('pixelSize') : pixelInput.value;
+pixelInput.value = pixelSize;
 document.querySelector('.color--current').style.background = currentColor;
 document.querySelector('.color--prev').style.background = previousColor;
-document.querySelector('.predefined-first').style.background = '#f07f7f';
-document.querySelector('.predefined-second').style.background = '#add8e6';
+document.querySelector('.predefined-first').style.background = 'rgb(240, 127, 127)';
+document.querySelector('.predefined-second').style.background = 'rgb(173, 216, 230)';
 
 function drawLine(e) {
   let lastX = e.offsetX;
@@ -94,7 +103,7 @@ function selectColorFromList(e) {
 
 function selectColorFromCanvas(e) {
   const color = ctx.getImageData(e.offsetX, e.offsetY, 1, 1).data;
-  const newColor = `rgb(${color[0]},${color[1]},${color[2]},${color[3]})`;
+  const newColor = `rgb(${color[0]}, ${color[1]}, ${color[2]}`;
   if (newColor !== currentColor) {
     previousColor = currentColor;
     currentColor = newColor;
@@ -104,9 +113,36 @@ function selectColorFromCanvas(e) {
 }
 
 function fillArea(e) {
-  console.log(e);
+  const targetColorArr = ctx.getImageData(e.offsetX, e.offsetY, 1, 1).data;
+  const targetColor = `rgb(${targetColorArr[0]}, ${targetColorArr[1]}, ${targetColorArr[2]})`;
   ctx.fillStyle = currentColor;
-  ctx.fillRect(0, 0, 512, 512);
+
+  if (targetColor === currentColor) return;
+
+  const lastX = e.offsetX;
+  const lastY = e.offsetY;
+
+  function floodFill(x, y) {
+    const newPointColorArray = ctx.getImageData(x, y, 1, 1).data;
+    const newPointColor = `rgb(${newPointColorArray[0]}, ${newPointColorArray[1]}, ${newPointColorArray[2]})`;
+    if (targetColor !== newPointColor) return;
+
+    ctx.fillRect(x, y, pixelSize, pixelSize);
+    if (x > 0) {
+      floodFill(x - pixelSize, y);
+    }
+    if (y > 0) {
+      floodFill(x, y - pixelSize);
+    }
+    if (x < 512) {
+      floodFill(x + +pixelSize, y);
+    }
+    if (y < 512) {
+      floodFill(x, y + +pixelSize);
+    }
+  }
+
+  floodFill(Math.floor(lastX / pixelSize) * pixelSize, Math.floor(lastY / pixelSize) * pixelSize);
 }
 
 function selectPencil() {
@@ -148,6 +184,15 @@ function selectBucket() {
   colorTools.removeEventListener('click', selectColorFromList);
 }
 
+function convertHex(hex) {
+  const newHex = hex.replace('#', '');
+  const r = parseInt(newHex.substring(0, 2), 16);
+  const g = parseInt(newHex.substring(2, 4), 16);
+  const b = parseInt(newHex.substring(4, 6), 16);
+
+  return `rgb(${r}, ${g}, ${b})`;
+}
+
 pencil.addEventListener('click', selectPencil);
 
 bucket.addEventListener('click', selectBucket);
@@ -158,7 +203,7 @@ fillDefault.addEventListener('click', canvasToDefault);
 
 colorInput.addEventListener('input', () => {
   if (colorInput.value !== currentColor) previousColor = currentColor;
-  currentColor = colorInput.value;
+  currentColor = convertHex(colorInput.value);
   colorTools.querySelector('.color--current').style.background = currentColor;
   colorTools.querySelector('.color--prev').style.background = previousColor;
 });
@@ -185,4 +230,15 @@ document.addEventListener('keypress', e => {
     default:
       break;
   }
+});
+
+window.addEventListener('beforeunload', () => {
+  localStorage.setItem('isFull', true);
+  localStorage.setItem('isPencil', isPencil);
+  localStorage.setItem('isPicker', isPicker);
+  localStorage.setItem('isBucket', isBucket);
+  localStorage.setItem('currentColor', currentColor);
+  localStorage.setItem('previousColor', previousColor);
+  localStorage.setItem('pixelSize', pixelSize);
+  localStorage.setItem('canvasData', canvas.toDataURL());
 });
