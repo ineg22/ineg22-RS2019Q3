@@ -4,6 +4,7 @@ const bucket = document.querySelector('#bucket');
 const colorInput = document.querySelector('#input-color');
 const pixelInput = document.querySelector('#pixel-size');
 const fillDefault = document.querySelector('#default');
+const colorTools = document.querySelector('.color-tools__list');
 const canvas = document.querySelector('#canvas');
 
 const ctx = canvas.getContext('2d');
@@ -29,9 +30,9 @@ function canvasToDefault() {
 canvasToDefault();
 
 let pixelSize = pixelInput.value;
-let isBucket = false;
+let isBucket = true;
 let isPicker = false;
-let isPencil = true;
+let isPencil = false;
 let currentColor = 'rgb(173, 255, 47)';
 let previousColor = 'rgb(128, 128, 128)';
 document.querySelector('.color--current').style.background = currentColor;
@@ -91,6 +92,23 @@ function selectColorFromList(e) {
   }
 }
 
+function selectColorFromCanvas(e) {
+  const color = ctx.getImageData(e.offsetX, e.offsetY, 1, 1).data;
+  const newColor = `rgb(${color[0]},${color[1]},${color[2]},${color[3]})`;
+  if (newColor !== currentColor) {
+    previousColor = currentColor;
+    currentColor = newColor;
+    document.querySelector('.color--current').style.background = currentColor;
+    document.querySelector('.color--prev').style.background = previousColor;
+  }
+}
+
+function fillArea(e) {
+  console.log(e);
+  ctx.fillStyle = currentColor;
+  ctx.fillRect(0, 0, 512, 512);
+}
+
 function selectPencil() {
   pencil.classList.add('selected');
   bucket.classList.remove('selected');
@@ -98,11 +116,10 @@ function selectPencil() {
   isPencil = true;
   isBucket = false;
   isPicker = false;
-  // if (!colorInput.classList.contains('hidden')) {
-  //   colorInput.classList.add('hidden');
-  // }
-  document.querySelector('.color-tools__list').removeEventListener('click', selectColorFromList);
   canvas.addEventListener('mousedown', drawLine);
+  canvas.removeEventListener('click', selectColorFromCanvas);
+  canvas.removeEventListener('click', fillArea);
+  colorTools.removeEventListener('click', selectColorFromList);
 }
 
 function selectPicker() {
@@ -112,11 +129,10 @@ function selectPicker() {
   isPencil = false;
   isBucket = false;
   isPicker = true;
-  // if (colorInput.classList.contains('hidden')) {
-  //   colorInput.classList.remove('hidden');
-  // }
   canvas.removeEventListener('mousedown', drawLine);
-  document.querySelector('.color-tools__list').addEventListener('click', selectColorFromList);
+  canvas.addEventListener('click', selectColorFromCanvas);
+  canvas.removeEventListener('click', fillArea);
+  colorTools.addEventListener('click', selectColorFromList);
 }
 
 function selectBucket() {
@@ -126,11 +142,10 @@ function selectBucket() {
   isPencil = false;
   isBucket = true;
   isPicker = false;
-  // if (!colorInput.classList.contains('hidden')) {
-  //   colorInput.classList.add('hidden');
-  // }
   canvas.removeEventListener('mousedown', drawLine);
-  document.querySelector('.color-tools__list').removeEventListener('click', selectColorFromList);
+  canvas.removeEventListener('click', selectColorFromCanvas);
+  canvas.addEventListener('click', fillArea);
+  colorTools.removeEventListener('click', selectColorFromList);
 }
 
 pencil.addEventListener('click', selectPencil);
@@ -139,19 +154,35 @@ bucket.addEventListener('click', selectBucket);
 
 picker.addEventListener('click', selectPicker);
 
+fillDefault.addEventListener('click', canvasToDefault);
+
 colorInput.addEventListener('input', () => {
   if (colorInput.value !== currentColor) previousColor = currentColor;
   currentColor = colorInput.value;
-  document.querySelector('.color--current').style.background = currentColor;
-  document.querySelector('.color--prev').style.background = previousColor;
+  colorTools.querySelector('.color--current').style.background = currentColor;
+  colorTools.querySelector('.color--prev').style.background = previousColor;
 });
 
 pixelInput.addEventListener('change', () => {
   pixelSize = pixelInput.value;
 });
 
-fillDefault.addEventListener('click', canvasToDefault);
-
 if (isPencil) selectPencil();
 if (isPicker) selectPicker();
 if (isBucket) selectBucket();
+
+document.addEventListener('keypress', e => {
+  switch (e.keyCode) {
+    case 98:
+      selectBucket();
+      break;
+    case 99:
+      selectPicker();
+      break;
+    case 112:
+      selectPencil();
+      break;
+    default:
+      break;
+  }
+});
