@@ -2,4 +2,4 @@
 
 Private repository for @ineg22
 
-codejam-palette task [hosting link](https://peaceful-hypatia-827ed3.netlify.com/)
+codejam-palette task [hosting link](https://wonderful-jackson-9ec2ba.netlify.com/)
