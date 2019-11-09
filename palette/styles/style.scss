@@ -93,15 +93,33 @@ li {
       margin: 0 20px 0 10px;
     }
 
-    input {
-      margin-left: 30px;
-      cursor: pointer;
-    }
-
     &:hover {
       border: 2px solid gray;
       cursor: pointer;
     }
+  }
+
+
+  label[for="input-color"],
+  .default {
+    margin-left: 46px;
+    padding: 0 5px;
+
+    font-size: 0.8rem;
+
+    border: 1px solid black;
+    cursor: pointer;
+  }
+
+  input[type="color"] {
+    display: none;
+  }
+
+  .pixel-size {
+    width: 45px;
+    margin-left: 98px;
+
+    outline: none;
   }
 
   .main-tools__item:nth-child(4) {

@@ -2,26 +2,33 @@ const pencil = document.querySelector('#pencil');
 const picker = document.querySelector('#picker');
 const bucket = document.querySelector('#bucket');
 const colorInput = document.querySelector('#input-color');
+const pixelInput = document.querySelector('#pixel-size');
+const fillDefault = document.querySelector('#default');
 const canvas = document.querySelector('#canvas');
 
 const ctx = canvas.getContext('2d');
 
-fetch('../data/4x4.json')
-  .then(
-    res => res.json(),
-    rej => {
-      throw new Error(rej);
-    }
-  )
-  .then(colors => {
-    for (let i = 0; i < 4; i += 1) {
-      for (let j = 0; j < 4; j += 1) {
-        ctx.fillStyle = `#${colors[i][j]}`;
-        ctx.fillRect((i * canvas.width) / 4, (j * canvas.height) / 4, canvas.width / 4, canvas.height / 4);
+function canvasToDefault() {
+  fetch('../data/4x4.json')
+    .then(
+      res => res.json(),
+      rej => {
+        throw new Error(rej);
       }
-    }
-  });
+    )
+    .then(colors => {
+      for (let i = 0; i < 4; i += 1) {
+        for (let j = 0; j < 4; j += 1) {
+          ctx.fillStyle = `#${colors[i][j]}`;
+          ctx.fillRect((i * canvas.width) / 4, (j * canvas.height) / 4, canvas.width / 4, canvas.height / 4);
+        }
+      }
+    });
+}
 
+canvasToDefault();
+
+let pixelSize = pixelInput.value;
 let isBucket = false;
 let isPicker = false;
 let isPencil = true;
@@ -36,8 +43,7 @@ function drawLine(e) {
   let lastX = e.offsetX;
   let lastY = e.offsetY;
   ctx.fillStyle = currentColor;
-  ctx.lineJoin = 'round';
-  ctx.fillRect(lastX, lastY, 1, 1);
+  ctx.fillRect(Math.floor(lastX / pixelSize) * pixelSize, Math.floor(lastY / pixelSize) * pixelSize, pixelSize, pixelSize);
 
   function drawing(evt) {
     const currX = evt.offsetX;
@@ -60,7 +66,7 @@ function drawLine(e) {
         err += deltaX;
         lastY += sy;
       }
-      ctx.fillRect(lastX, lastY, 1, 1);
+      ctx.fillRect(Math.floor(lastX / pixelSize) * pixelSize, Math.floor(lastY / pixelSize) * pixelSize, pixelSize, pixelSize);
     }
   }
 
@@ -92,9 +98,9 @@ function selectPencil() {
   isPencil = true;
   isBucket = false;
   isPicker = false;
-  if (!colorInput.classList.contains('hidden')) {
-    colorInput.classList.add('hidden');
-  }
+  // if (!colorInput.classList.contains('hidden')) {
+  //   colorInput.classList.add('hidden');
+  // }
   document.querySelector('.color-tools__list').removeEventListener('click', selectColorFromList);
   canvas.addEventListener('mousedown', drawLine);
 }
@@ -106,9 +112,9 @@ function selectPicker() {
   isPencil = false;
   isBucket = false;
   isPicker = true;
-  if (colorInput.classList.contains('hidden')) {
-    colorInput.classList.remove('hidden');
-  }
+  // if (colorInput.classList.contains('hidden')) {
+  //   colorInput.classList.remove('hidden');
+  // }
   canvas.removeEventListener('mousedown', drawLine);
   document.querySelector('.color-tools__list').addEventListener('click', selectColorFromList);
 }
@@ -120,9 +126,9 @@ function selectBucket() {
   isPencil = false;
   isBucket = true;
   isPicker = false;
-  if (!colorInput.classList.contains('hidden')) {
-    colorInput.classList.add('hidden');
-  }
+  // if (!colorInput.classList.contains('hidden')) {
+  //   colorInput.classList.add('hidden');
+  // }
   canvas.removeEventListener('mousedown', drawLine);
   document.querySelector('.color-tools__list').removeEventListener('click', selectColorFromList);
 }
@@ -134,11 +140,17 @@ bucket.addEventListener('click', selectBucket);
 picker.addEventListener('click', selectPicker);
 
 colorInput.addEventListener('input', () => {
-  if (previousColor !== currentColor) previousColor = currentColor;
+  if (colorInput.value !== currentColor) previousColor = currentColor;
   currentColor = colorInput.value;
   document.querySelector('.color--current').style.background = currentColor;
   document.querySelector('.color--prev').style.background = previousColor;
 });
+
+pixelInput.addEventListener('change', () => {
+  pixelSize = pixelInput.value;
+});
+
+fillDefault.addEventListener('click', canvasToDefault);
 
 if (isPencil) selectPencil();
 if (isPicker) selectPicker();

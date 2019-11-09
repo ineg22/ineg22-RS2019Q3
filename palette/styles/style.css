@@ -117,14 +117,28 @@ li {
   margin: 0 20px 0 10px;
 }
 
-.tools-wrapper .main-tools__item input {
-  margin-left: 30px;
-  cursor: pointer;
-}
-
 .tools-wrapper .main-tools__item:hover {
   border: 2px solid gray;
   cursor: pointer;
+}
+
+.tools-wrapper label[for="input-color"],
+.tools-wrapper .default {
+  margin-left: 46px;
+  padding: 0 5px;
+  font-size: 0.8rem;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.tools-wrapper input[type="color"] {
+  display: none;
+}
+
+.tools-wrapper .pixel-size {
+  width: 45px;
+  margin-left: 98px;
+  outline: none;
 }
 
 .tools-wrapper .main-tools__item:nth-child(4) {

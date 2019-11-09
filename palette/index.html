@@ -29,16 +29,29 @@
                         <li class="main-tools__item" title="click b" id="bucket">
                             <img src="./assets/bucket-icon.svg" alt="bucket">
                             <span>Paint bucket</span>
+                            <span class="default" id="default"
+                                title="click to set canvas fill to default">default</span>
                         </li>
                         <li class="main-tools__item" title="click c" id="picker">
                             <img src="./assets/picker-icon.svg" alt="color picker">
                             <span>Choose color</span>
-                            <input type="color" name="input-color" id="input-color" class="hidden"
-                                title="click to select color" value="#adff2f">
+                            <label for="input-color" title="click to select color">select</label>
+                            <input type="color" name="input-color" id="input-color" value="#adff2f">
                         </li>
                         <li class="main-tools__item selected" title="click p" id="pencil">
                             <img src="./assets/pencil-icon.svg" alt="pencil">
                             <span>Pencil</span>
+                            <select class="pixel-size" name="pixel-size" id="pixel-size"
+                                title="pixel size from 1 to 128">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="4">4</option>
+                                <option value="8">8</option>
+                                <option value="16">16</option>
+                                <option value="32">32</option>
+                                <option value="64">64</option>
+                                <option value="128">128</option>
+                            </select>
                         </li>
                         <li class="main-tools__item">
                             <img src="./assets/transform-icon.svg" alt="transform">
