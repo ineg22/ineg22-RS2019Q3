@@ -155,7 +155,6 @@ function selectPencil() {
   canvas.addEventListener('mousedown', drawLine);
   canvas.removeEventListener('click', selectColorFromCanvas);
   canvas.removeEventListener('click', fillArea);
-  colorTools.removeEventListener('click', selectColorFromList);
 }
 
 function selectPicker() {
@@ -168,7 +167,6 @@ function selectPicker() {
   canvas.removeEventListener('mousedown', drawLine);
   canvas.addEventListener('click', selectColorFromCanvas);
   canvas.removeEventListener('click', fillArea);
-  colorTools.addEventListener('click', selectColorFromList);
 }
 
 function selectBucket() {
@@ -181,7 +179,6 @@ function selectBucket() {
   canvas.removeEventListener('mousedown', drawLine);
   canvas.removeEventListener('click', selectColorFromCanvas);
   canvas.addEventListener('click', fillArea);
-  colorTools.removeEventListener('click', selectColorFromList);
 }
 
 function convertHex(hex) {
@@ -201,6 +198,8 @@ picker.addEventListener('click', selectPicker);
 
 fillDefault.addEventListener('click', canvasToDefault);
 
+colorTools.addEventListener('click', selectColorFromList);
+
 colorInput.addEventListener('input', () => {
   if (colorInput.value !== currentColor) previousColor = currentColor;
   currentColor = convertHex(colorInput.value);
@@ -211,10 +210,6 @@ colorInput.addEventListener('input', () => {
 pixelInput.addEventListener('change', () => {
   pixelSize = pixelInput.value;
 });
-
-if (isPencil) selectPencil();
-if (isPicker) selectPicker();
-if (isBucket) selectBucket();
 
 document.addEventListener('keypress', e => {
   switch (e.keyCode) {
@@ -242,3 +237,6 @@ window.addEventListener('beforeunload', () => {
   localStorage.setItem('pixelSize', pixelSize);
   localStorage.setItem('canvasData', canvas.toDataURL());
 });
+if (isPencil) selectPencil();
+if (isPicker) selectPicker();
+if (isBucket) selectBucket();
