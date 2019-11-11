@@ -181,15 +181,6 @@ function selectBucket() {
   canvas.addEventListener('click', fillArea);
 }
 
-function convertHex(hex) {
-  const newHex = hex.replace('#', '');
-  const r = parseInt(newHex.substring(0, 2), 16);
-  const g = parseInt(newHex.substring(2, 4), 16);
-  const b = parseInt(newHex.substring(4, 6), 16);
-
-  return `rgb(${r}, ${g}, ${b})`;
-}
-
 pencil.addEventListener('click', selectPencil);
 
 bucket.addEventListener('click', selectBucket);
@@ -202,7 +193,7 @@ colorTools.addEventListener('click', selectColorFromList);
 
 colorInput.addEventListener('input', () => {
   if (colorInput.value !== currentColor) previousColor = currentColor;
-  currentColor = convertHex(colorInput.value);
+  currentColor = window.convertHex(colorInput.value);
   colorTools.querySelector('.color--current').style.background = currentColor;
   colorTools.querySelector('.color--prev').style.background = previousColor;
 });
