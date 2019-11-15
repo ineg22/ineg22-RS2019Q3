@@ -2,16 +2,92 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>codejam-image-api RSS task</title>
-  <link rel="stylesheet" href="dist/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>codejam-image-api RSS task</title>
+    <link rel="stylesheet" href="./dist/style.css">
 </head>
 
 <body>
-
-  <script src="dist/bundle.js"></script>
+    <div class="global-wrapper">
+        <header class="header">
+            <div class="header__left">
+                <div class="burger">
+                    <img src="./dist/assets/nav-icon.svg" alt="nav">
+                </div>
+                <h1>Codejam - Palette</h1>
+            </div>
+            <div class="dots">
+                <img src="./dist/assets/menu-icon.svg" alt="menu">
+            </div>
+        </header>
+        <main class="main">
+            <div class="tools-wrapper">
+                <div class="main-tools">
+                    <ul class="main-tools__list">
+                        <li class="main-tools__item" title="click b" id="bucket">
+                            <img src="./dist/assets/bucket-icon.svg" alt="bucket">
+                            <span>Paint bucket</span>
+                            <span class="default" id="default"
+                                title="click to set canvas fill to default">default</span>
+                        </li>
+                        <li class="main-tools__item" title="click c" id="picker">
+                            <img src="./dist/assets/picker-icon.svg" alt="color picker">
+                            <span>Choose color</span>
+                            <label for="input-color" title="click to select color">select</label>
+                            <input type="color" name="input-color" id="input-color" value="#adff2f">
+                        </li>
+                        <li class="main-tools__item selected" title="click p" id="pencil">
+                            <img src="./dist/assets/pencil-icon.svg" alt="pencil">
+                            <span>Pencil</span>
+                            <select class="pixel-size" name="pixel-size" id="pixel-size"
+                                title="pixel size from 1 to 128">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="4">4</option>
+                                <option value="8">8</option>
+                                <option value="16">16</option>
+                                <option value="32" selected>32</option>
+                                <option value="64">64</option>
+                                <option value="128">128</option>
+                            </select>
+                        </li>
+                        <li class="main-tools__item">
+                            <img src="./dist/assets/transform-icon.svg" alt="transform">
+                            <span>Transform</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="color-tools">
+                    <ul class="color-tools__list">
+                        <li class="color-tools__item">
+                            <div class="color color--current"></div>
+                            <span>Current color</span>
+                        </li>
+                        <li class="color-tools__item">
+                            <div class="color color--prev"></div>
+                            <span>Prev color</span>
+                        </li>
+                        <li class="color-tools__item">
+                            <div class="color predefined-first"></div>
+                            <span>red</span>
+                        </li>
+                        <li class="color-tools__item">
+                            <div class="color predefined-second"></div>
+                            <span>blue</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="canvas-wrapper">
+                <canvas id="canvas" width="512" height="512">
+                    update your browser
+                </canvas>
+            </div>
+        </main>
+    </div>
+    <script src="./dist/bundle.js"></script>
 </body>
 
 </html>

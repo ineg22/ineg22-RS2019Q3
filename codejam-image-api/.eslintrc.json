@@ -1,4 +1,11 @@
 {
-  "printWidth": 100,
-  "singleQuote": true
+  "env": {
+    "browser": true,
+    "jest/globals": true
+  },
+  "extends": ["airbnb", "prettier"],
+  "plugins": ["prettier", "jest"],
+  "rules": {
+    "prettier/prettier": ["error"]
+  }
 }
