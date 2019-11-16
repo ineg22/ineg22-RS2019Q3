@@ -13,6 +13,7 @@ const canvas = document.querySelector('#canvas');
 const ctx = canvas.getContext('2d');
 ctx.imageSmoothingEnabled = false;
 
+let isImageLoaded = localStorage.getItem('isFull') ? JSON.parse(localStorage.getItem('isImageLoaded')) : false;
 let isBucket = localStorage.getItem('isFull') ? JSON.parse(localStorage.getItem('isBucket')) : false;
 let isPicker = localStorage.getItem('isFull') ? JSON.parse(localStorage.getItem('isPicker')) : false;
 let isPencil = localStorage.getItem('isFull') ? JSON.parse(localStorage.getItem('isPencil')) : true;
@@ -20,10 +21,10 @@ let currentColor = localStorage.getItem('isFull') ? localStorage.getItem('curren
 let previousColor = localStorage.getItem('isFull') ? localStorage.getItem('previousColor') : 'rgb(128, 128, 128)';
 let pixelSize = localStorage.getItem('isFull') ? +localStorage.getItem('pixelSize') : 1;
 let canvasSizeValue = localStorage.getItem('isFull') ? +localStorage.getItem('canvasSizeValue') : 3;
+let canvasSize = localStorage.getItem('isFull') ? localStorage.getItem('canvasSize') : 512;
 canvasSizeInput.value = canvasSizeValue;
 let searchValue = localStorage.getItem('isFull') ? localStorage.getItem('searchValue') : searchRequest.value;
 searchRequest.value = searchValue;
-let canvasSize;
 document.querySelector('.color--current').style.background = currentColor;
 document.querySelector('.color--prev').style.background = previousColor;
 document.querySelector('.predefined-first').style.background = 'rgb(240, 127, 127)';
@@ -40,16 +41,16 @@ function renderCanvasOnSwitchSize() {
 
   const img = new Image();
   img.src = bufferDataURL;
-  img.onload = () => {
+  img.addEventListener('load', () => {
     bufferCtx.drawImage(img, 0, 0, canvasSize, canvasSize);
     bufferDataURL = buffer.toDataURL();
 
     const newImg = new Image();
     newImg.src = bufferDataURL;
-    newImg.onload = () => {
+    newImg.addEventListener('load', () => {
       ctx.drawImage(newImg, 0, 0, 512, 512);
-    };
-  };
+    });
+  });
 }
 
 function canvasSwitchSize() {
@@ -75,12 +76,14 @@ function canvasSwitchSize() {
 }
 
 function clearCanvas() {
+  isImageLoaded = false;
   ctx.fillStyle = 'rgb(0, 0, 0)';
   ctx.fillRect(0, 0, 512, 512);
 }
 
 async function loadImage() {
   clearCanvas();
+  isImageLoaded = true;
   const accessKey = 'cac4a2afa1112aa460191f5729f405c16fd86321d76f9112b94e31e6ce94b7ba';
   const url = `https://api.unsplash.com/photos/random?query=town,${searchValue}&client_id=${accessKey}`;
 
@@ -103,6 +106,9 @@ async function loadImage() {
       height = Math.floor(height * (512 / width));
       posY = Math.floor((512 - height) / 2);
       width = 512;
+    } else if (width === height && width > 512) {
+      height = 512;
+      width = 512;
     }
 
     canvasSizeInput.value = 3;
@@ -112,7 +118,20 @@ async function loadImage() {
 }
 
 function grayscaleImage() {
-  console.log('fired');
+  if (!isImageLoaded) {
+    alert('Please, load image before!');
+    return;
+  }
+  const imgData = ctx.getImageData(0, 0, canvasSize, canvasSize);
+  const pixels = imgData.data;
+  for (let i = 0; i < pixels.length; i += 4) {
+    const lightness = parseInt((pixels[i] + pixels[i + 1] + pixels[i + 2]) / 3, 10);
+
+    pixels[i] = lightness;
+    pixels[i + 1] = lightness;
+    pixels[i + 2] = lightness;
+  }
+  ctx.putImageData(imgData, 0, 0);
 }
 
 function drawLine(e) {
@@ -272,10 +291,6 @@ fillDefault.addEventListener('click', clearCanvas);
 
 colorTools.addEventListener('click', selectColorFromList);
 
-// searchRequest.addEventListener('keypress', e => {
-//   if (e.keyCode === 13) loadImage();
-// });
-
 canvasSizeInput.addEventListener('change', () => {
   canvasSwitchSize();
   renderCanvasOnSwitchSize();
@@ -315,11 +330,13 @@ window.addEventListener('beforeunload', () => {
   localStorage.setItem('isPencil', isPencil);
   localStorage.setItem('isPicker', isPicker);
   localStorage.setItem('isBucket', isBucket);
+  localStorage.setItem('isImageLoaded', isImageLoaded);
   localStorage.setItem('currentColor', currentColor);
   localStorage.setItem('previousColor', previousColor);
   localStorage.setItem('pixelSize', pixelSize);
   localStorage.setItem('canvasData', canvas.toDataURL());
   localStorage.setItem('canvasSizeValue', canvasSizeInput.value);
+  localStorage.setItem('canvasSize', canvasSize);
   localStorage.setItem('searchValue', searchValue);
 });
 if (isPencil) selectPencil();
