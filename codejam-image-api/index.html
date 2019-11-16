@@ -16,7 +16,7 @@
                 <div class="burger">
                     <img src="./dist/assets/nav-icon.svg" alt="nav">
                 </div>
-                <h1>Codejam - Palette</h1>
+                <h1>Codejam - Image API</h1>
             </div>
             <div class="dots">
                 <img src="./dist/assets/menu-icon.svg" alt="menu">
@@ -29,8 +29,7 @@
                         <li class="main-tools__item" title="click b" id="bucket">
                             <img src="./dist/assets/bucket-icon.svg" alt="bucket">
                             <span>Paint bucket</span>
-                            <span class="default" id="default"
-                                title="click to set canvas fill to default">default</span>
+                            <span class="default" id="default" title="click to clear canvas">clear</span>
                         </li>
                         <li class="main-tools__item" title="click c" id="picker">
                             <img src="./dist/assets/picker-icon.svg" alt="color picker">
@@ -41,17 +40,6 @@
                         <li class="main-tools__item selected" title="click p" id="pencil">
                             <img src="./dist/assets/pencil-icon.svg" alt="pencil">
                             <span>Pencil</span>
-                            <select class="pixel-size" name="pixel-size" id="pixel-size"
-                                title="pixel size from 1 to 128">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="4">4</option>
-                                <option value="8">8</option>
-                                <option value="16">16</option>
-                                <option value="32" selected>32</option>
-                                <option value="64">64</option>
-                                <option value="128">128</option>
-                            </select>
                         </li>
                         <li class="main-tools__item">
                             <img src="./dist/assets/transform-icon.svg" alt="transform">
@@ -81,9 +69,16 @@
                 </div>
             </div>
             <div class="canvas-wrapper">
-                <canvas id="canvas" width="512" height="512">
+                <div class="image-tools">
+                    <div class="load-image">Load</div>
+                    <input type="search" name="image-search" id="image-search" value="Minsk">
+                    <div class="image-grayscale">B&W</div>
+                </div>
+                <canvas id="canvas" class="canvas" width="512" height="512">
                     update your browser
                 </canvas>
+                <input type="range" name="canvas-size" id="canvas-size" class="canvas-size-input" min='1' max='3'
+                    step='1'>
             </div>
         </main>
     </div>

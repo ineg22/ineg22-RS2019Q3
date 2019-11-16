@@ -2,28 +2,85 @@ const pencil = document.querySelector('#pencil');
 const picker = document.querySelector('#picker');
 const bucket = document.querySelector('#bucket');
 const colorInput = document.querySelector('#input-color');
-const pixelInput = document.querySelector('#pixel-size');
+const canvasSizeInput = document.querySelector('#canvas-size');
 const fillDefault = document.querySelector('#default');
 const colorTools = document.querySelector('.color-tools__list');
 const canvas = document.querySelector('#canvas');
 const ctx = canvas.getContext('2d');
 
+let isBucket = localStorage.getItem('isFull') ? JSON.parse(localStorage.getItem('isBucket')) : false;
+let isPicker = localStorage.getItem('isFull') ? JSON.parse(localStorage.getItem('isPicker')) : false;
+let isPencil = localStorage.getItem('isFull') ? JSON.parse(localStorage.getItem('isPencil')) : true;
+let currentColor = localStorage.getItem('isFull') ? localStorage.getItem('currentColor') : 'rgb(173, 255, 47)';
+let previousColor = localStorage.getItem('isFull') ? localStorage.getItem('previousColor') : 'rgb(128, 128, 128)';
+let pixelSize = localStorage.getItem('isFull') ? +localStorage.getItem('pixelSize') : 4;
+document.querySelector('.color--current').style.background = currentColor;
+document.querySelector('.color--prev').style.background = previousColor;
+document.querySelector('.predefined-first').style.background = 'rgb(240, 127, 127)';
+document.querySelector('.predefined-second').style.background = 'rgb(173, 216, 230)';
+
+function clearCanvas() {
+  ctx.fillStyle = '#000000';
+  ctx.fillRect(0, 0, 512, 512);
+}
+
 function canvasToDefault() {
-  fetch('../dist/data/4x4.json')
-    .then(
-      res => res.json(),
-      rej => {
-        throw new Error(rej);
-      }
-    )
-    .then(colors => {
-      for (let i = 0; i < 4; i += 1) {
-        for (let j = 0; j < 4; j += 1) {
-          ctx.fillStyle = `#${colors[i][j]}`;
-          ctx.fillRect((i * canvas.width) / 4, (j * canvas.height) / 4, canvas.width / 4, canvas.height / 4);
-        }
-      }
+  const url = 'https://a.wattpad.com/cover/84608722-352-k886345.jpg';
+  // const url = 'https://media3.s-nbcnews.com/j/newscms/2019_41/3047866/191010-japan-stalker-mc-1121_06b4c20bbf96a51dc8663f334404a899.fit-760w.JPG';
+  let size;
+  switch (canvasSizeInput.value) {
+    case '1':
+      size = 128;
+      pixelSize = 4;
+      break;
+    case '2':
+      size = 256;
+      pixelSize = 2;
+      break;
+    case '3':
+      size = 512;
+      pixelSize = 1;
+      break;
+    default:
+      size = 128;
+      pixelSize = 4;
+      break;
+  }
+  ctx.imageSmoothingEnabled = false;
+  ctx.fillStyle = '#000000';
+  ctx.fillRect(0, 0, 512, 512);
+  const img = new Image();
+  img.crossOrigin = 'Anonymous';
+  img.src = url;
+  img.addEventListener('load', () => {
+    let { width, height } = img;
+    let posX = 0;
+    let posY = 0;
+    if (height > width && height > size) {
+      width = Math.floor(width * (size / height));
+      posX = Math.floor((size - width) / 2);
+      height = size;
+    } else if (width > height && width > size) {
+      height = Math.floor(height * (size / width));
+      posY = Math.floor((size - height) / 2);
+      width = size;
+    }
+
+    const buffer = document.createElement('canvas');
+    buffer.width = size;
+    buffer.height = size;
+    buffer.style.imageRendering = 'pixelated';
+    const bufferCtx = buffer.getContext('2d');
+    bufferCtx.imageSmoothingEnabled = false;
+    bufferCtx.drawImage(img, posX, posY, width, height);
+    const bufferImgURL = buffer.toDataURL();
+
+    const bufferImg = new Image();
+    bufferImg.src = bufferImgURL;
+    bufferImg.addEventListener('load', () => {
+      ctx.drawImage(bufferImg, 0, 0, 512, 512);
     });
+  });
 }
 
 if (localStorage.getItem('isFull')) {
@@ -36,18 +93,6 @@ if (localStorage.getItem('isFull')) {
 } else {
   canvasToDefault();
 }
-
-let isBucket = localStorage.getItem('isFull') ? JSON.parse(localStorage.getItem('isBucket')) : false;
-let isPicker = localStorage.getItem('isFull') ? JSON.parse(localStorage.getItem('isPicker')) : false;
-let isPencil = localStorage.getItem('isFull') ? JSON.parse(localStorage.getItem('isPencil')) : true;
-let currentColor = localStorage.getItem('isFull') ? localStorage.getItem('currentColor') : 'rgb(173, 255, 47)';
-let previousColor = localStorage.getItem('isFull') ? localStorage.getItem('previousColor') : 'rgb(128, 128, 128)';
-let pixelSize = localStorage.getItem('isFull') ? +localStorage.getItem('pixelSize') : pixelInput.value;
-pixelInput.value = pixelSize;
-document.querySelector('.color--current').style.background = currentColor;
-document.querySelector('.color--prev').style.background = previousColor;
-document.querySelector('.predefined-first').style.background = 'rgb(240, 127, 127)';
-document.querySelector('.predefined-second').style.background = 'rgb(173, 216, 230)';
 
 function drawLine(e) {
   let lastX = e.offsetX;
@@ -187,19 +232,17 @@ bucket.addEventListener('click', selectBucket);
 
 picker.addEventListener('click', selectPicker);
 
-fillDefault.addEventListener('click', canvasToDefault);
+fillDefault.addEventListener('click', clearCanvas);
 
 colorTools.addEventListener('click', selectColorFromList);
+
+canvasSizeInput.addEventListener('change', canvasToDefault);
 
 colorInput.addEventListener('input', () => {
   if (colorInput.value !== currentColor) previousColor = currentColor;
   currentColor = window.convertHex(colorInput.value);
   colorTools.querySelector('.color--current').style.background = currentColor;
   colorTools.querySelector('.color--prev').style.background = previousColor;
-});
-
-pixelInput.addEventListener('change', () => {
-  pixelSize = pixelInput.value;
 });
 
 document.addEventListener('keypress', e => {
