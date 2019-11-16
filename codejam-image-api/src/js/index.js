@@ -5,93 +5,113 @@ const colorInput = document.querySelector('#input-color');
 const canvasSizeInput = document.querySelector('#canvas-size');
 const fillDefault = document.querySelector('#default');
 const colorTools = document.querySelector('.color-tools__list');
+const loader = document.querySelector('#load-image');
+const grayscale = document.querySelector('#image-grayscale');
+const searchRequest = document.querySelector('#image-search');
+
 const canvas = document.querySelector('#canvas');
 const ctx = canvas.getContext('2d');
+ctx.imageSmoothingEnabled = false;
 
 let isBucket = localStorage.getItem('isFull') ? JSON.parse(localStorage.getItem('isBucket')) : false;
 let isPicker = localStorage.getItem('isFull') ? JSON.parse(localStorage.getItem('isPicker')) : false;
 let isPencil = localStorage.getItem('isFull') ? JSON.parse(localStorage.getItem('isPencil')) : true;
 let currentColor = localStorage.getItem('isFull') ? localStorage.getItem('currentColor') : 'rgb(173, 255, 47)';
 let previousColor = localStorage.getItem('isFull') ? localStorage.getItem('previousColor') : 'rgb(128, 128, 128)';
-let pixelSize = localStorage.getItem('isFull') ? +localStorage.getItem('pixelSize') : 4;
+let pixelSize = localStorage.getItem('isFull') ? +localStorage.getItem('pixelSize') : 1;
+let canvasSizeValue = localStorage.getItem('isFull') ? +localStorage.getItem('canvasSizeValue') : 3;
+canvasSizeInput.value = canvasSizeValue;
+let size;
 document.querySelector('.color--current').style.background = currentColor;
 document.querySelector('.color--prev').style.background = previousColor;
 document.querySelector('.predefined-first').style.background = 'rgb(240, 127, 127)';
 document.querySelector('.predefined-second').style.background = 'rgb(173, 216, 230)';
 
+function renderCanvasOnSwitchSize() {
+  const buffer = document.createElement('canvas');
+  buffer.width = size;
+  buffer.height = size;
+  buffer.style.imageRendering = 'pixelated';
+  const bufferCtx = buffer.getContext('2d');
+  bufferCtx.imageSmoothingEnabled = false;
+  let bufferDataURL = canvas.toDataURL();
+
+  const img = new Image();
+  img.src = bufferDataURL;
+  img.onload = () => {
+    bufferCtx.drawImage(img, 0, 0, size, size);
+    bufferDataURL = buffer.toDataURL();
+
+    const newImg = new Image();
+    newImg.src = bufferDataURL;
+    newImg.onload = () => {
+      ctx.drawImage(newImg, 0, 0, 512, 512);
+    };
+  };
+}
+
+function canvasSwitchSize() {
+  canvasSizeValue = canvasSizeInput.value;
+  switch (canvasSizeValue) {
+    case '1':
+      pixelSize = 4;
+      size = 128;
+      break;
+    case '2':
+      pixelSize = 2;
+      size = 256;
+      break;
+    case '3':
+      pixelSize = 1;
+      size = 512;
+      break;
+    default:
+      pixelSize = 4;
+      size = 512;
+      break;
+  }
+}
+
 function clearCanvas() {
-  ctx.fillStyle = '#000000';
+  ctx.fillStyle = 'rgb(0, 0, 0)';
   ctx.fillRect(0, 0, 512, 512);
 }
 
-function canvasToDefault() {
-  const url = 'https://a.wattpad.com/cover/84608722-352-k886345.jpg';
-  // const url = 'https://media3.s-nbcnews.com/j/newscms/2019_41/3047866/191010-japan-stalker-mc-1121_06b4c20bbf96a51dc8663f334404a899.fit-760w.JPG';
-  let size;
-  switch (canvasSizeInput.value) {
-    case '1':
-      size = 128;
-      pixelSize = 4;
-      break;
-    case '2':
-      size = 256;
-      pixelSize = 2;
-      break;
-    case '3':
-      size = 512;
-      pixelSize = 1;
-      break;
-    default:
-      size = 128;
-      pixelSize = 4;
-      break;
-  }
-  ctx.imageSmoothingEnabled = false;
-  ctx.fillStyle = '#000000';
-  ctx.fillRect(0, 0, 512, 512);
+async function loadImage() {
+  clearCanvas();
+  const requestVal = searchRequest.value || 'Minsk';
+  const accessKey = 'cac4a2afa1112aa460191f5729f405c16fd86321d76f9112b94e31e6ce94b7ba';
+  const url = `https://api.unsplash.com/photos/random?query=town,${requestVal}&client_id=${accessKey}`;
+
   const img = new Image();
   img.crossOrigin = 'Anonymous';
-  img.src = url;
+  const imgURL = await fetch(url)
+    .then(res => res.json())
+    .then(data => data.urls.regular);
+
+  img.src = imgURL;
   img.addEventListener('load', () => {
     let { width, height } = img;
     let posX = 0;
     let posY = 0;
-    if (height > width && height > size) {
-      width = Math.floor(width * (size / height));
-      posX = Math.floor((size - width) / 2);
-      height = size;
-    } else if (width > height && width > size) {
-      height = Math.floor(height * (size / width));
-      posY = Math.floor((size - height) / 2);
-      width = size;
+    if (height > width && height > 512) {
+      width = Math.floor(width * (512 / height));
+      posX = Math.floor((512 - width) / 2);
+      height = 512;
+    } else if (width > height && width > 512) {
+      height = Math.floor(height * (512 / width));
+      posY = Math.floor((512 - height) / 2);
+      width = 512;
     }
 
-    const buffer = document.createElement('canvas');
-    buffer.width = size;
-    buffer.height = size;
-    buffer.style.imageRendering = 'pixelated';
-    const bufferCtx = buffer.getContext('2d');
-    bufferCtx.imageSmoothingEnabled = false;
-    bufferCtx.drawImage(img, posX, posY, width, height);
-    const bufferImgURL = buffer.toDataURL();
-
-    const bufferImg = new Image();
-    bufferImg.src = bufferImgURL;
-    bufferImg.addEventListener('load', () => {
-      ctx.drawImage(bufferImg, 0, 0, 512, 512);
-    });
+    canvasSizeInput.value = 3;
+    canvasSwitchSize();
+    ctx.drawImage(img, posX, posY, width, height);
   });
 }
 
-if (localStorage.getItem('isFull')) {
-  const dataURL = localStorage.getItem('canvasData');
-  const img = new Image();
-  img.src = dataURL;
-  img.onload = () => {
-    ctx.drawImage(img, 0, 0);
-  };
-} else {
-  canvasToDefault();
+function grayscaleImage() {
+  console.log('fired');
 }
 
 function drawLine(e) {
@@ -226,6 +246,21 @@ function selectBucket() {
   canvas.addEventListener('click', fillArea);
 }
 
+if (localStorage.getItem('isFull')) {
+  const dataURL = localStorage.getItem('canvasData');
+  const img = new Image();
+  img.src = dataURL;
+  img.addEventListener('load', () => {
+    ctx.drawImage(img, 0, 0);
+  });
+} else {
+  clearCanvas();
+}
+
+grayscale.addEventListener('click', grayscaleImage);
+
+loader.addEventListener('click', loadImage);
+
 pencil.addEventListener('click', selectPencil);
 
 bucket.addEventListener('click', selectBucket);
@@ -236,7 +271,10 @@ fillDefault.addEventListener('click', clearCanvas);
 
 colorTools.addEventListener('click', selectColorFromList);
 
-canvasSizeInput.addEventListener('change', canvasToDefault);
+canvasSizeInput.addEventListener('change', () => {
+  canvasSwitchSize();
+  renderCanvasOnSwitchSize();
+});
 
 colorInput.addEventListener('input', () => {
   if (colorInput.value !== currentColor) previousColor = currentColor;
@@ -270,6 +308,7 @@ window.addEventListener('beforeunload', () => {
   localStorage.setItem('previousColor', previousColor);
   localStorage.setItem('pixelSize', pixelSize);
   localStorage.setItem('canvasData', canvas.toDataURL());
+  localStorage.setItem('canvasSizeValue', canvasSizeInput.value);
 });
 if (isPencil) selectPencil();
 if (isPicker) selectPicker();
