@@ -3,6 +3,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
+  mode: 'development',
   entry: './src/app.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -19,11 +20,5 @@ module.exports = {
       },
     ],
   },
-  plugins: [
-    new ExtractTextPlugin('style.css'),
-    new CopyPlugin([
-      { from: 'src/assets', to: 'assets' },
-      { from: 'src/data', to: 'data' },
-    ]),
-  ],
+  plugins: [new ExtractTextPlugin('style.css'), new CopyPlugin([{ from: 'src/assets', to: 'assets' }])],
 };
