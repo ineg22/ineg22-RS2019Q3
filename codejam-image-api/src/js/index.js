@@ -21,7 +21,9 @@ let previousColor = localStorage.getItem('isFull') ? localStorage.getItem('previ
 let pixelSize = localStorage.getItem('isFull') ? +localStorage.getItem('pixelSize') : 1;
 let canvasSizeValue = localStorage.getItem('isFull') ? +localStorage.getItem('canvasSizeValue') : 3;
 canvasSizeInput.value = canvasSizeValue;
-let size;
+let searchValue = localStorage.getItem('isFull') ? localStorage.getItem('searchValue') : searchRequest.value;
+searchRequest.value = searchValue;
+let canvasSize;
 document.querySelector('.color--current').style.background = currentColor;
 document.querySelector('.color--prev').style.background = previousColor;
 document.querySelector('.predefined-first').style.background = 'rgb(240, 127, 127)';
@@ -29,8 +31,8 @@ document.querySelector('.predefined-second').style.background = 'rgb(173, 216, 2
 
 function renderCanvasOnSwitchSize() {
   const buffer = document.createElement('canvas');
-  buffer.width = size;
-  buffer.height = size;
+  buffer.width = canvasSize;
+  buffer.height = canvasSize;
   buffer.style.imageRendering = 'pixelated';
   const bufferCtx = buffer.getContext('2d');
   bufferCtx.imageSmoothingEnabled = false;
@@ -39,7 +41,7 @@ function renderCanvasOnSwitchSize() {
   const img = new Image();
   img.src = bufferDataURL;
   img.onload = () => {
-    bufferCtx.drawImage(img, 0, 0, size, size);
+    bufferCtx.drawImage(img, 0, 0, canvasSize, canvasSize);
     bufferDataURL = buffer.toDataURL();
 
     const newImg = new Image();
@@ -55,19 +57,19 @@ function canvasSwitchSize() {
   switch (canvasSizeValue) {
     case '1':
       pixelSize = 4;
-      size = 128;
+      canvasSize = 128;
       break;
     case '2':
       pixelSize = 2;
-      size = 256;
+      canvasSize = 256;
       break;
     case '3':
       pixelSize = 1;
-      size = 512;
+      canvasSize = 512;
       break;
     default:
       pixelSize = 4;
-      size = 512;
+      canvasSize = 512;
       break;
   }
 }
@@ -79,9 +81,8 @@ function clearCanvas() {
 
 async function loadImage() {
   clearCanvas();
-  const requestVal = searchRequest.value || 'Minsk';
   const accessKey = 'cac4a2afa1112aa460191f5729f405c16fd86321d76f9112b94e31e6ce94b7ba';
-  const url = `https://api.unsplash.com/photos/random?query=town,${requestVal}&client_id=${accessKey}`;
+  const url = `https://api.unsplash.com/photos/random?query=town,${searchValue}&client_id=${accessKey}`;
 
   const img = new Image();
   img.crossOrigin = 'Anonymous';
@@ -271,6 +272,10 @@ fillDefault.addEventListener('click', clearCanvas);
 
 colorTools.addEventListener('click', selectColorFromList);
 
+// searchRequest.addEventListener('keypress', e => {
+//   if (e.keyCode === 13) loadImage();
+// });
+
 canvasSizeInput.addEventListener('change', () => {
   canvasSwitchSize();
   renderCanvasOnSwitchSize();
@@ -294,6 +299,12 @@ document.addEventListener('keypress', e => {
     case 112:
       selectPencil();
       break;
+    case 13:
+      if (e.target === searchRequest) {
+        searchValue = searchRequest.value;
+        loadImage();
+      }
+      break;
     default:
       break;
   }
@@ -309,6 +320,7 @@ window.addEventListener('beforeunload', () => {
   localStorage.setItem('pixelSize', pixelSize);
   localStorage.setItem('canvasData', canvas.toDataURL());
   localStorage.setItem('canvasSizeValue', canvasSizeInput.value);
+  localStorage.setItem('searchValue', searchValue);
 });
 if (isPencil) selectPencil();
 if (isPicker) selectPicker();

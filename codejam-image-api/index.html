@@ -71,12 +71,17 @@
             <div class="canvas-wrapper">
                 <div class="image-tools">
                     <div class="load-image" id="load-image">Load</div>
-                    <input type="search" name="image-search" id="image-search" value="Minsk">
+                    <input type="text" name="image-search" id="image-search" class="image-search" value="Minsk">
                     <div class="image-grayscale" id="image-grayscale">B&W</div>
                 </div>
                 <canvas id="canvas" class="canvas" width="512" height="512">
                     update your browser
                 </canvas>
+                <div class="size-label">
+                    <span>128</span>
+                    <span>256</span>
+                    <span>512</span>
+                </div>
                 <input type="range" name="canvas-size" id="canvas-size" class="canvas-size-input" min='1' max='3'
                     step='1'>
             </div>
