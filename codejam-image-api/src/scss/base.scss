@@ -56,11 +56,19 @@ li {
     }
   }
 
-  .dots {
+  .header__right {
+    display: flex;
+    align-items: center;
     margin-right: 20px;
 
     &:hover {
       cursor: pointer;
+    }
+
+    .login {
+      text-decoration: none;
+      color: black;
+      margin-right: 20px;
     }
   }
 }
