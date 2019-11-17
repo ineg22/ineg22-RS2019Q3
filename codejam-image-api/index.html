@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>codejam-image-api RSS task</title>
     <link rel="stylesheet" href="./dist/style.css">
+    <script src="https://unpkg.com/netlify-auth-providers"></script>
 </head>
 
 <body>
@@ -17,7 +18,14 @@
                 <h1>Codejam - Image API</h1>
             </div>
             <div class="header__right">
-                <a href="" class="login" id="login">Login with GitHub</a>
+                <div class="login" id="login">Login</div>
+                <div class="login-output" id="login-output">
+                    <a id="user-acc" href="">
+                        <div class="user-avatar" id="user-avatar"></div>
+                    </a>
+                    <span class="user-name" id="user-name">Ineg22</span>
+                    <span class="logout" id="logout">Logout</span>
+                </div>
                 <img src="./dist/assets/menu-icon.svg" alt="menu">
             </div>
         </header>
