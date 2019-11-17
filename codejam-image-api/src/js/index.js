@@ -21,7 +21,7 @@ let currentColor = localStorage.getItem('isFull') ? localStorage.getItem('curren
 let previousColor = localStorage.getItem('isFull') ? localStorage.getItem('previousColor') : 'rgb(128, 128, 128)';
 let pixelSize = localStorage.getItem('isFull') ? +localStorage.getItem('pixelSize') : 1;
 let canvasSizeValue = localStorage.getItem('isFull') ? +localStorage.getItem('canvasSizeValue') : 3;
-let canvasSize = localStorage.getItem('isFull') ? localStorage.getItem('canvasSize') : 512;
+let canvasSize = localStorage.getItem('isFull') ? +localStorage.getItem('canvasSize') : 512;
 canvasSizeInput.value = canvasSizeValue;
 let searchValue = localStorage.getItem('isFull') ? localStorage.getItem('searchValue') : searchRequest.value;
 searchRequest.value = searchValue;
@@ -122,7 +122,7 @@ function grayscaleImage() {
     alert('Please, load image before!');
     return;
   }
-  const imgData = ctx.getImageData(0, 0, canvasSize, canvasSize);
+  const imgData = ctx.getImageData(0, 0, 512, 512);
   const pixels = imgData.data;
   for (let i = 0; i < pixels.length; i += 4) {
     const lightness = parseInt((pixels[i] + pixels[i + 1] + pixels[i + 2]) / 3, 10);
