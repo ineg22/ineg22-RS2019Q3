@@ -5,6 +5,7 @@ const logoutEl = document.querySelector('#logout');
 const loginOutput = document.querySelector('#login-output');
 const userAvatar = document.querySelector('#user-avatar');
 const userAcc = document.querySelector('#user-acc');
+const userName = document.querySelector('#user-name');
 
 async function loginSuccess(token) {
   const userData = await fetch('https://api.github.com/user', {
@@ -16,7 +17,8 @@ async function loginSuccess(token) {
   loginEl.classList.add('hidden');
   loginOutput.classList.remove('hidden');
   userAvatar.style.backgroundImage = `url("${userData.avatar_url}")`;
-  userAcc.setAttribute('href', `${userData.html_url}`);
+  userAcc.setAttribute('href', userData.html_url);
+  userName.innerText = userData.login;
 }
 
 function loginHandler(e) {
