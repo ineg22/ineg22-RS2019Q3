@@ -60,15 +60,12 @@ li {
   font-size: 1.5rem;
 }
 
-.header .header__left .burger:hover {
+.header .header__left .burger {
   cursor: pointer;
 }
 
 .header .dots {
   margin-right: 20px;
-}
-
-.header .dots:hover {
   cursor: pointer;
 }
 
@@ -243,4 +240,11 @@ li {
     margin: 0;
   }
 }
-/*# sourceMappingURL=style.css.map */
+
+.predefined-first {
+  background-color: #f07f7f;
+}
+
+.predefined-second {
+  background-color: lightblue;
+}

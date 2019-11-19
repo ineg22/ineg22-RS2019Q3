@@ -1,3 +1,5 @@
+import convertHex from './helper.js';
+
 const pencil = document.querySelector('#pencil');
 const picker = document.querySelector('#picker');
 const bucket = document.querySelector('#bucket');
@@ -46,8 +48,6 @@ let pixelSize = localStorage.getItem('isFull') ? +localStorage.getItem('pixelSiz
 pixelInput.value = pixelSize;
 document.querySelector('.color--current').style.background = currentColor;
 document.querySelector('.color--prev').style.background = previousColor;
-document.querySelector('.predefined-first').style.background = 'rgb(240, 127, 127)';
-document.querySelector('.predefined-second').style.background = 'rgb(173, 216, 230)';
 
 function drawLine(e) {
   let lastX = e.offsetX;
@@ -92,23 +92,24 @@ function drawLine(e) {
 }
 
 function selectColorFromList(e) {
-  const newColor = e.target.closest('.color-tools__item').firstElementChild.style.background;
-  if (newColor !== currentColor) {
+  const pickedElem = e.target.closest('.color-tools__item').firstElementChild;
+  const pickedColor = window.getComputedStyle(pickedElem).backgroundColor;
+  if (pickedColor !== currentColor) {
     previousColor = currentColor;
-    currentColor = newColor;
-    document.querySelector('.color--current').style.background = currentColor;
-    document.querySelector('.color--prev').style.background = previousColor;
+    currentColor = pickedColor;
+    document.querySelector('.color--current').style.backgroundColor = currentColor;
+    document.querySelector('.color--prev').style.backgroundColor = previousColor;
   }
 }
 
 function selectColorFromCanvas(e) {
   const color = ctx.getImageData(e.offsetX, e.offsetY, 1, 1).data;
-  const newColor = `rgb(${color[0]}, ${color[1]}, ${color[2]}`;
+  const newColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
   if (newColor !== currentColor) {
     previousColor = currentColor;
     currentColor = newColor;
-    document.querySelector('.color--current').style.background = currentColor;
-    document.querySelector('.color--prev').style.background = previousColor;
+    document.querySelector('.color--current').style.backgroundColor = currentColor;
+    document.querySelector('.color--prev').style.backgroundColor = previousColor;
   }
 }
 
@@ -193,7 +194,7 @@ colorTools.addEventListener('click', selectColorFromList);
 
 colorInput.addEventListener('input', () => {
   if (colorInput.value !== currentColor) previousColor = currentColor;
-  currentColor = window.convertHex(colorInput.value);
+  currentColor = convertHex(colorInput.value);
   colorTools.querySelector('.color--current').style.background = currentColor;
   colorTools.querySelector('.color--prev').style.background = previousColor;
 });

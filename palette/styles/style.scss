@@ -50,18 +50,13 @@ li {
     }
 
     .burger {
-      &:hover {
-        cursor: pointer;
-      }
+      cursor: pointer;
     }
   }
 
   .dots {
     margin-right: 20px;
-
-    &:hover {
-      cursor: pointer;
-    }
+    cursor: pointer;
   }
 }
 
@@ -208,4 +203,12 @@ li {
   .canvas-wrapper {
     margin: 0;
   }
+}
+
+.predefined-first {
+  background-color: rgb(240, 127, 127);
+}
+
+.predefined-second {
+  background-color: rgb(173, 216, 230);
 }
