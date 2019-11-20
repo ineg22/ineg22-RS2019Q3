@@ -259,7 +259,7 @@ li {
     width: 100%;
     height: 3px;
 
-    background: #00a6bb;
+    background-color: #00a6bb;
     border: 0;
     cursor: pointer;
   }
@@ -271,7 +271,7 @@ li {
     width: 30px;
     height: 30px;
 
-    background: #00a6bb;
+    background-color: #00a6bb;
     border-radius: 50% 50% 0 50%;
     transform: rotate(45deg);
     cursor: pointer;
@@ -320,4 +320,12 @@ li {
   .canvas-wrapper {
     margin: 0;
   }
+}
+
+.predefined-first {
+  background-color: rgb(240, 127, 127);
+}
+
+.predefined-second {
+  background-color: rgb(173, 216, 230);
 }

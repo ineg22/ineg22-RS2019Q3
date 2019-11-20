@@ -1,5 +1,5 @@
-/* eslint-disable no-undef */
-/* eslint-disable new-cap */
+import Netlify from 'netlify-auth-providers';
+
 const loginEl = document.querySelector('#login');
 const logoutEl = document.querySelector('#logout');
 const loginOutput = document.querySelector('#login-output');
@@ -23,7 +23,7 @@ async function loginSuccess(token) {
 
 function loginHandler(e) {
   e.preventDefault();
-  const authenticator = new netlify.default({});
+  const authenticator = new Netlify({});
   authenticator.authenticate({ provider: 'github', scope: 'user' }, (err, data) => {
     if (err) {
       throw new Error('Authenticating error');

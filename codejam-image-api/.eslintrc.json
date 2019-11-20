@@ -3,10 +3,13 @@
     "browser": true,
     "jest/globals": true
   },
-  "extends": ["airbnb", "prettier"],
+  "extends": ["airbnb-base", "prettier"],
   "plugins": ["prettier", "jest"],
   "rules": {
     "prettier/prettier": ["error"],
+    "import/extensions": ["error", "always", {
+      "ignorePackages": true
+    }],
     "no-alert": "off"
   }
 }
