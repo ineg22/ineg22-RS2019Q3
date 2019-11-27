@@ -10,6 +10,7 @@ const colorTools = document.querySelector('.color-tools__list');
 const loader = document.querySelector('#load-image');
 const grayscale = document.querySelector('#image-grayscale');
 const searchRequest = document.querySelector('#image-search');
+const DEFAULT_SIZE = 512;
 
 const canvas = document.querySelector('#canvas');
 const ctx = canvas.getContext('2d');
@@ -21,9 +22,9 @@ let isPicker = localStorage.getItem('isFull') ? JSON.parse(localStorage.getItem(
 let isPencil = localStorage.getItem('isFull') ? JSON.parse(localStorage.getItem('isPencil')) : true;
 let currentColor = localStorage.getItem('isFull') ? localStorage.getItem('currentColor') : 'rgb(173, 255, 47)';
 let previousColor = localStorage.getItem('isFull') ? localStorage.getItem('previousColor') : 'rgb(128, 128, 128)';
-let pixelSize = localStorage.getItem('isFull') ? +localStorage.getItem('pixelSize') : 1;
-let canvasSizeValue = localStorage.getItem('isFull') ? +localStorage.getItem('canvasSizeValue') : 3;
-let canvasSize = localStorage.getItem('isFull') ? +localStorage.getItem('canvasSize') : 512;
+let pixelSize = localStorage.getItem('isFull') ? Number.parseInt(localStorage.getItem('pixelSize'), 10) : 1;
+let canvasSizeValue = localStorage.getItem('isFull') ? Number.parseInt(localStorage.getItem('canvasSizeValue'), 10) : 3;
+let canvasSize = localStorage.getItem('isFull') ? Number.parseInt(localStorage.getItem('canvasSize'), 10) : DEFAULT_SIZE;
 canvasSizeInput.value = canvasSizeValue;
 let searchValue = localStorage.getItem('isFull') ? localStorage.getItem('searchValue') : searchRequest.value;
 searchRequest.value = searchValue;
@@ -48,29 +49,31 @@ function renderCanvasOnSwitchSize() {
     const newImg = new Image();
     newImg.src = bufferDataURL;
     newImg.addEventListener('load', () => {
-      ctx.drawImage(newImg, 0, 0, 512, 512);
+      ctx.drawImage(newImg, 0, 0, DEFAULT_SIZE, DEFAULT_SIZE);
     });
   });
 }
 
 function canvasSwitchSize() {
   canvasSizeValue = canvasSizeInput.value;
+
+  function setSize(ps, cs) {
+    pixelSize = ps;
+    canvasSize = cs;
+  }
+
   switch (canvasSizeValue) {
     case '1':
-      pixelSize = 4;
-      canvasSize = 128;
+      setSize(4, 128);
       break;
     case '2':
-      pixelSize = 2;
-      canvasSize = 256;
+      setSize(2, 256);
       break;
     case '3':
-      pixelSize = 1;
-      canvasSize = 512;
+      setSize(1, 512);
       break;
     default:
-      pixelSize = 4;
-      canvasSize = 512;
+      setSize(4, 128);
       break;
   }
 }
@@ -78,7 +81,7 @@ function canvasSwitchSize() {
 function clearCanvas() {
   isImageLoaded = false;
   ctx.fillStyle = 'rgb(0, 0, 0)';
-  ctx.fillRect(0, 0, 512, 512);
+  ctx.fillRect(0, 0, DEFAULT_SIZE, DEFAULT_SIZE);
 }
 
 async function loadImage() {
@@ -99,17 +102,17 @@ async function loadImage() {
     let { width, height } = img;
     let posX = 0;
     let posY = 0;
-    if (height > width && height > 512) {
-      width = Math.floor(width * (512 / height));
-      posX = Math.floor((512 - width) / 2);
-      height = 512;
-    } else if (width > height && width > 512) {
-      height = Math.floor(height * (512 / width));
-      posY = Math.floor((512 - height) / 2);
-      width = 512;
-    } else if (width === height && width > 512) {
-      height = 512;
-      width = 512;
+    if (height > width && height > DEFAULT_SIZE) {
+      width = Math.floor(width * (DEFAULT_SIZE / height));
+      posX = Math.floor((DEFAULT_SIZE - width) / 2);
+      height = DEFAULT_SIZE;
+    } else if (width > height && width > DEFAULT_SIZE) {
+      height = Math.floor(height * (DEFAULT_SIZE / width));
+      posY = Math.floor((DEFAULT_SIZE - height) / 2);
+      width = DEFAULT_SIZE;
+    } else if (width === height && width > DEFAULT_SIZE) {
+      height = DEFAULT_SIZE;
+      width = DEFAULT_SIZE;
     }
 
     canvasSizeInput.value = 3;
@@ -123,7 +126,7 @@ function grayscaleImage() {
     alert('Please, load image before!');
     return;
   }
-  const imgData = ctx.getImageData(0, 0, 512, 512);
+  const imgData = ctx.getImageData(0, 0, DEFAULT_SIZE, DEFAULT_SIZE);
   const pixels = imgData.data;
   for (let i = 0; i < pixels.length; i += 4) {
     const lightness = parseInt((pixels[i] + pixels[i + 1] + pixels[i + 2]) / 3, 10);
@@ -139,7 +142,10 @@ function drawLine(e) {
   let lastX = e.offsetX;
   let lastY = e.offsetY;
   ctx.fillStyle = currentColor;
-  ctx.fillRect(Math.floor(lastX / pixelSize) * pixelSize, Math.floor(lastY / pixelSize) * pixelSize, pixelSize, pixelSize);
+
+  let posX = Math.floor(lastX / pixelSize) * pixelSize;
+  let posY = Math.floor(lastY / pixelSize) * pixelSize;
+  ctx.fillRect(posX, posY, pixelSize, pixelSize);
 
   function drawing(evt) {
     const currX = evt.offsetX;
@@ -162,7 +168,10 @@ function drawLine(e) {
         err += deltaX;
         lastY += sy;
       }
-      ctx.fillRect(Math.floor(lastX / pixelSize) * pixelSize, Math.floor(lastY / pixelSize) * pixelSize, pixelSize, pixelSize);
+
+      posX = Math.floor(lastX / pixelSize) * pixelSize;
+      posY = Math.floor(lastY / pixelSize) * pixelSize;
+      ctx.fillRect(posX, posY, pixelSize, pixelSize);
     }
   }
 
@@ -221,10 +230,10 @@ function fillArea(e) {
     if (y > 0) {
       floodFill(x, y - pixelSize);
     }
-    if (x < 512) {
+    if (x < DEFAULT_SIZE) {
       floodFill(x + +pixelSize, y);
     }
-    if (y < 512) {
+    if (y < DEFAULT_SIZE) {
       floodFill(x, y + +pixelSize);
     }
   }
