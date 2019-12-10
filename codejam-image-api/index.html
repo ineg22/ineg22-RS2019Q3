@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>codejam-image-api RSS task</title>
+    <link rel="stylesheet" href="./dist/style.css">
+</head>
+
+<body>
+    <div class="global-wrapper">
+        <header class="header">
+            <div class="header__left">
+                <img class="burger" src="./dist/assets/nav-icon.svg" alt="navigation">
+                <h1>Codejam - Image API</h1>
+            </div>
+            <div class="header__right">
+                <div class="login" id="login">Login</div>
+                <div class="login-output hidden" id="login-output">
+                    <a id="user-acc" href="">
+                        <div class="user-avatar" id="user-avatar"></div>
+                    </a>
+                    <span class="user-name" id="user-name"></span>
+                    <span class="logout" id="logout">Logout</span>
+                </div>
+                <img src="./dist/assets/menu-icon.svg" alt="menu">
+            </div>
+        </header>
+        <main class="main">
+            <div class="tools-wrapper">
+                <div class="main-tools">
+                    <ul class="main-tools__list">
+                        <li class="main-tools__item" title="click b" id="bucket">
+                            <img src="./dist/assets/bucket-icon.svg" alt="bucket">
+                            <span>Paint bucket</span>
+                        </li>
+                        <li class="main-tools__item" title="click c" id="picker">
+                            <img src="./dist/assets/picker-icon.svg" alt="color picker">
+                            <span>Choose color</span>
+                            <label for="input-color" title="click to select color">select</label>
+                            <input type="color" name="input-color" id="input-color" value="#adff2f">
+                        </li>
+                        <li class="main-tools__item selected" title="click p" id="pencil">
+                            <img src="./dist/assets/pencil-icon.svg" alt="pencil">
+                            <span>Pencil</span>
+                        </li>
+                        <li class="main-tools__item">
+                            <img src="./dist/assets/transform-icon.svg" alt="transform">
+                            <span>Transform</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="color-tools">
+                    <ul class="color-tools__list">
+                        <li class="color-tools__item">
+                            <div class="color color--current"></div>
+                            <span>Current color</span>
+                        </li>
+                        <li class="color-tools__item">
+                            <div class="color color--prev"></div>
+                            <span>Prev color</span>
+                        </li>
+                        <li class="color-tools__item">
+                            <div class="color predefined-first"></div>
+                            <span>red</span>
+                        </li>
+                        <li class="color-tools__item">
+                            <div class="color predefined-second"></div>
+                            <span>blue</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="canvas-wrapper">
+                <div class="image-tools">
+                    <span class="default" id="default" title="click to clear canvas">Clear</span>
+                    <div class="load-image" id="load-image">Load</div>
+                    <input type="text" name="image-search" id="image-search" class="image-search" value="Minsk">
+                    <div class="image-grayscale" id="image-grayscale">B&W</div>
+                </div>
+                <canvas id="canvas" class="canvas" width="512" height="512">
+                    update your browser
+                </canvas>
+                <div class="size-label">
+                    <span>128</span>
+                    <span>256</span>
+                    <span>512</span>
+                </div>
+                <input class="canvas-size-input" type="range" name="canvas-size" id="canvas-size" min='1' max='3'
+                    step='1'>
+            </div>
+        </main>
+    </div>
+    <script defer src="./dist/bundle.js"></script>
+</body>
+
+</html>
