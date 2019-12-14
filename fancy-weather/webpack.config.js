@@ -18,12 +18,26 @@ module.exports = {
           use: ['css-loader', 'sass-loader'],
         }),
       },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        use: {
+          loader: 'file-loader',
+          options: {
+            outputPath: 'fonts',
+          },
+        },
+      },
     ],
   },
   plugins: [
     new ExtractTextPlugin('style.css'),
     new HtmlWebpackPlugin({
       template: './src/index.html',
+      favicon: 'src/favicon.ico',
     }),
   ],
 };
