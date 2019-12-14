@@ -1,12 +1,11 @@
 import getImageURL from '../api/getImageURL.js';
-import showBG from '../view/showBG.js';
-import mapPanTo from './mapPanTo.js';
-import renderWeather from '../view/renderWeather.js';
 import getForecast from '../api/getForecast.js';
-import getTags from '../getTags.js';
 import getTimezone from '../api/getTimezone.js';
+import { mapPanTo } from '../api/getMap.js';
 
-import { getDateTime } from '../utils.js';
+import renderWeather from '../view/renderWeather.js';
+
+import { getDateTime, getTags, showBG } from '../utils.js';
 import MAP from '../MAP.js';
 
 export default async function searchHandler(e, map, meas, timeInterval) {

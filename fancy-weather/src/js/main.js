@@ -3,17 +3,17 @@ import '../styles/bootstrap.min.css';
 import '../../node_modules/weather-icons/css/weather-icons.min.css';
 import '../../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
 
-import showLoader from './view/loader.js';
-import renderFrame from './view/renderFrame.js';
-
-import getTags from './getTags.js';
-
 import getUserLocation from './api/getLocation.js';
 import getImageURL from './api/getImageURL.js';
 import getForecast from './api/getForecast.js';
 import getMap from './api/getMap.js';
 
+import renderLoader from './view/renderLoader.js';
+import renderFrame from './view/renderFrame.js';
+
 import initControls from './control/initControls.js';
+
+import { getTags } from './utils.js';
 
 const lang = localStorage.getItem('lang') || 'ru';
 const meas = localStorage.getItem('meas') || 'C';
@@ -40,5 +40,5 @@ async function init() {
   initControls(tags, map, meas, timeInterval);
 }
 
-showLoader();
+renderLoader();
 init();

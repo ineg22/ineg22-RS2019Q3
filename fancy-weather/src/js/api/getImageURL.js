@@ -1,4 +1,4 @@
-import getRandomNumber from '../utils.js';
+import { getRandomNumber } from '../utils.js';
 import renderError from '../view/renderError.js';
 
 export default async function getImageURL(tags) {

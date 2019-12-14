@@ -1,4 +1,4 @@
-export default function showLoader() {
+export default function renderLoader() {
   const { body } = document;
   body.innerHTML = '';
 

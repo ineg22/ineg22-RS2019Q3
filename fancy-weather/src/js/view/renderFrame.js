@@ -1,8 +1,8 @@
 import renderWeather from './renderWeather.js'; // forecast-full
 import renderForm from './renderForm.js'; // lang, meas
 import renderMap from './renderMap.js';
-import showBG from './showBG.js';
-import { getDateTime } from '../utils.js';
+
+import { getDateTime, showBG } from '../utils.js';
 
 export default async function renderFrame(url, forecast, location, lang, meas) {
   const { body } = document;

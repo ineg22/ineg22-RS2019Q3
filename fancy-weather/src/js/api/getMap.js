@@ -77,3 +77,28 @@ export async function getGeocode(val, lang) {
     throw new Error(`${err.name}(${err.code}): ${err.message}`);
   }
 }
+
+export async function mapPanTo(map, lang) {
+  const inputEl = document.querySelector('.input-search');
+  const searchValue = inputEl.value.toString();
+
+  try {
+    const geocode = await getGeocode(searchValue, lang);
+
+    const coords = geocode.geoObjects.get(0).geometry.getCoordinates();
+
+    map.panTo(coords, { duration: 2000 });
+
+    return coords;
+  } catch (err) {
+    err.name = 'getGeocode API Error';
+    err.message = `interesting place: ${searchValue}. It can't be cured without magic`;
+    renderError(err);
+
+    document.querySelector('.error-button').addEventListener('click', () => {
+      document.location.reload();
+    });
+
+    throw new Error(`${err.name}(${err.code}): ${err.message}`);
+  }
+}

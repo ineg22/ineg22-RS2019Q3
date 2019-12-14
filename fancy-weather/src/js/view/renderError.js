@@ -20,7 +20,7 @@ export default function renderError({ name, message }) {
   errorBody.appendChild(errorMessage);
 
   const errorButton = document.createElement('button');
-  errorButton.classList.value = 'btn btn-secondary';
+  errorButton.classList.value = 'btn btn-secondary error-button';
   errorButton.setAttribute('type', 'button');
   errorButton.textContent = 'Okay ;(';
   errorButton.addEventListener('click', errorButtonHandler);
