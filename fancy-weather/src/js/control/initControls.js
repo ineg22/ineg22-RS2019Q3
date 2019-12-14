@@ -1,5 +1,6 @@
 import refreshHandler from './refreshHandler.js';
 import searchHandler from './searchHandler.js';
+import micHandler from './micHandler.js';
 
 function measCHandler() {
   const meas = 'C';
@@ -25,6 +26,7 @@ function langHandler() {
 export default function initControls(tags, map, meas, timeInterval) {
   const buttonRefresh = document.querySelector('.button-refresh');
   const buttonSearch = document.querySelector('.button-search');
+  const buttonMic = document.querySelector('.button-mic');
   const langSelect = document.querySelector('.lang-select');
   const measureC = document.querySelector('.measure-c');
   const measureF = document.querySelector('.measure-f');
@@ -47,4 +49,6 @@ export default function initControls(tags, map, meas, timeInterval) {
   measureC.addEventListener('click', measCHandler);
 
   measureF.addEventListener('click', measFHandler);
+
+  buttonMic.addEventListener('mousedown', micHandler);
 }

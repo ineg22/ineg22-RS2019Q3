@@ -1,5 +1,8 @@
-function errorButtonHandler() {
-  document.querySelector('.fake').remove();
+function errorButtonHandler(e) {
+  if (e.keyCode === 13 || e.type === 'click') {
+    document.querySelector('.fake').remove();
+    window.removeEventListener('keypress', errorButtonHandler);
+  }
 }
 
 export default function renderError({ name, message }) {
@@ -24,6 +27,7 @@ export default function renderError({ name, message }) {
   errorButton.setAttribute('type', 'button');
   errorButton.textContent = 'Okay ;(';
   errorButton.addEventListener('click', errorButtonHandler);
+  window.addEventListener('keypress', errorButtonHandler);
 
   const errorFooter = document.createElement('div');
   errorFooter.classList.value = 'error-footer modal-footer';
