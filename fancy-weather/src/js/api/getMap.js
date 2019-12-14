@@ -92,11 +92,11 @@ export async function mapPanTo(map, lang) {
     return coords;
   } catch (err) {
     err.name = 'getGeocode API Error';
-    err.message = `interesting place: ${searchValue}. It can't be cured without magic`;
+    err.message = `interesting place: "${searchValue}". try again`;
     renderError(err);
 
     document.querySelector('.error-button').addEventListener('click', () => {
-      document.location.reload();
+      inputEl.value = '';
     });
 
     throw new Error(`${err.name}(${err.code}): ${err.message}`);

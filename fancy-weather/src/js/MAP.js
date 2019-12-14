@@ -144,10 +144,10 @@ const MAP = {
     },
   },
   icon: {
-    'clear-day': ['wi-day-sunny', 'clear'],
+    'clear-day': ['wi-day-sunny', 'clear,sky'],
     'clear-night': ['wi-night-clear', 'clear,sky'],
-    'partly-cloudy-day': ['wi-day-cloudy', 'sky'],
-    'partly-cloudy-night': ['wi-night-partly-cloudy', 'sky,cloud'],
+    'partly-cloudy-day': ['wi-day-cloudy', 'cloud'],
+    'partly-cloudy-night': ['wi-night-partly-cloudy', 'cloud'],
     rain: ['wi-rain', 'rain'],
     snow: ['wi-snow', 'snowing'],
     sleet: ['wi-sleet', 'sleet'],
