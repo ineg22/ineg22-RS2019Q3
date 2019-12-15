@@ -53,6 +53,7 @@ export default async function searchHandler(e, map, meas, timeInterval, tags) {
 
   const newInterval = setInterval(() => {
     document.querySelector('.date-time').textContent = getDateTime(
+      lang,
       timeZone.gmtOffset
     );
   }, 1000);

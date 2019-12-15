@@ -18,7 +18,7 @@ export default async function renderFrame(url, forecast, location, lang, meas) {
   showBG(url);
 
   const timeInterval = setInterval(() => {
-    document.querySelector('.date-time').textContent = getDateTime();
+    document.querySelector('.date-time').textContent = getDateTime(lang);
   }, 1000);
   return timeInterval;
 }

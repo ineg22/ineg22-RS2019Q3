@@ -1,16 +1,26 @@
 import MAP from './MAP.js';
 
 export function getRandomNumber(num) {
+  if (!num || typeof num !== 'number' || num < 0) {
+    throw new Error('invalid arguments');
+  }
+
   return Math.floor(Math.random() * num);
 }
 
 export function toFahrenheit(val) {
+  if (!val || typeof val !== 'number') {
+    throw new Error('invalid arguments');
+  }
+
   return Math.round((val * 9) / 5 + 32);
 }
 
-export function getDateTime(gmtOffset = 10800) {
+export function getDateTime(lang, gmtOffset = 10800) {
+  if (typeof gmtOffset !== 'number' || typeof lang !== 'string') {
+    throw new Error('invalid arguments');
+  }
   const offset = (gmtOffset - 10800) * 1000;
-  const lang = document.querySelector('.lang-select').value.toLowerCase();
   const langArr = MAP[lang];
 
   const fakeDate = new Date();
@@ -35,6 +45,16 @@ export function getDateTime(gmtOffset = 10800) {
 }
 
 export function getTags(curr) {
+  if (
+    !(curr instanceof Object) ||
+    !curr.time ||
+    !curr.icon ||
+    typeof curr.time !== 'number' ||
+    typeof curr.icon !== 'string'
+  ) {
+    throw new Error('invalid arguments');
+  }
+
   const { time, icon } = curr;
 
   const date = new Date(time * 1000);
