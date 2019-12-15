@@ -4,7 +4,7 @@ export default async function getForecast(loc) {
   const API_TOKEN = 'f11901ee631628df00a73fd6b08cef3e';
   const { latitude, longitude } = loc;
 
-  const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+  const proxyUrl = 'https://evening-basin-27448.herokuapp.com/';
   const URL = `https://api.darksky.net/forecast/${API_TOKEN}/${latitude},${longitude}?units=si&lang=en`;
 
   try {
