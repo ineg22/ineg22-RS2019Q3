@@ -64,8 +64,12 @@ export function getTags(curr) {
   const weather = MAP.icon[icon][1];
 
   let dayTime;
-  if (hours >= 8 && hours <= 20) {
-    dayTime = 'sky';
+  if (hours >= 6 && hours <= 9) {
+    dayTime = 'morning';
+  } else if (hours >= 10 && hours <= 17) {
+    dayTime = 'day';
+  } else if (hours >= 18 && hours <= 20) {
+    dayTime = 'evening';
   } else {
     dayTime = 'night';
   }

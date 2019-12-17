@@ -80,7 +80,7 @@ export default async function renderWeather(
   humiditySpan.classList.add('forecast-detail__humidity');
   humiditySpan.textContent = `${langArray.other[7]} ${Math.round(
     currently.humidity
-  )}°`;
+  )}%`;
 
   const forecastDetail = document.createElement('div');
   forecastDetail.classList.add('forecast-detail');

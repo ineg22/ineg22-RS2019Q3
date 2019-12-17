@@ -12,7 +12,7 @@ export default function micHandler() {
       langFormatted = 'ru-RU';
       break;
     case 'be':
-      langFormatted = 'en-US';
+      langFormatted = 'ru-RU';
       break;
     default:
       break;

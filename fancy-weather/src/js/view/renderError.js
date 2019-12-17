@@ -6,6 +6,10 @@ function errorButtonHandler(e) {
 }
 
 export default function renderError({ name, message }) {
+  if (document.querySelector('.input-search')) {
+    document.querySelector('.input-search').blur();
+  }
+
   const errorName = document.createElement('h5');
   errorName.classList.value = 'error-name modal-title';
   errorName.textContent = name;

@@ -27,8 +27,8 @@ const MAP = {
     other: [
       'Найти',
       'Найти город',
-      'Широта: ',
-      'Долгота: ',
+      'Широта',
+      'Долгота',
       'Ощущается как ',
       'Скорость ветра: ',
       ' м/с',
@@ -75,8 +75,8 @@ const MAP = {
     other: [
       'Search',
       'Search city',
-      'Latitude: ',
-      'Longitude: ',
+      'Latitude',
+      'Longitude',
       'Feels like: ',
       'Wind speed: ',
       ' m/s',
@@ -85,8 +85,8 @@ const MAP = {
     weather: {
       'clear-day': 'cloudless',
       'clear-night': 'cloudless',
-      'partly-cloudy-day': 'partial cloud cover',
-      'partly-cloudy-night': 'partial cloud cover',
+      'partly-cloudy-day': 'partially cloudy',
+      'partly-cloudy-night': 'partially cloudy',
       rain: 'rain',
       snow: 'snow',
       sleet: 'sleet',
@@ -123,8 +123,8 @@ const MAP = {
     other: [
       'Знайсці',
       'Пошук горада',
-      'Шырата: ',
-      'Даўгата: ',
+      'Шырата',
+      'Даўгата',
       'Адчуваецца як: ',
       'Хуткасць ветра: ',
       ' м/с',

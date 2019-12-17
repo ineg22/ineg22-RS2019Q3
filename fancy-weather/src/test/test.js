@@ -88,7 +88,7 @@ describe('getTags', () => {
 
   it('should return correct values', () => {
     expect(tags[0]).toEqual('summer');
-    expect(tags[1]).toEqual('sky');
+    expect(tags[1]).toEqual('day');
     expect(tags[2]).toEqual('rain');
   });
 });
