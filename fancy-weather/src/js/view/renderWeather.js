@@ -1,5 +1,6 @@
 import MAP from '../MAP.js';
 import { getGeocode } from '../api/getMap.js';
+import getBelarusianGeocode from '../api/getBelarusianGeocode.js';
 import { toFahrenheit } from '../utils.js';
 
 export default async function renderWeather(
@@ -30,18 +31,23 @@ export default async function renderWeather(
   }
 
   const { latitude, longitude } = location;
-  const geo = await getGeocode([latitude, longitude], lang);
-  const res = geo.geoObjects.get(0).properties.getAll().balloonContentBody;
+  let locality;
+  if (lang !== 'be') {
+    const geo = await getGeocode([latitude, longitude], lang);
+    locality = geo.geoObjects.get(0).properties.getAll().balloonContentBody;
+  } else {
+    locality = await getBelarusianGeocode(`${latitude},${longitude}`);
+  }
 
   const forecastWrapper = document.createElement('div');
   forecastWrapper.classList.add('forecast-wrapper');
 
   const locationEl = document.createElement('div');
   locationEl.classList.add('location');
-  locationEl.innerHTML = res;
+  locationEl.innerHTML = locality;
 
   const dateTime = document.createElement('div');
-  dateTime.classList.add('date-time');
+  dateTime.classList.value = 'date-time dots';
 
   const forecastShort = document.createElement('span');
   forecastShort.classList.add('forecast-short');

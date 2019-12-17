@@ -94,10 +94,7 @@ export async function mapPanTo(map, lang) {
     err.name = 'getGeocode API Error';
     err.message = `interesting place: "${searchValue}". try again`;
     renderError(err);
-
-    document.querySelector('.error-button').addEventListener('click', () => {
-      inputEl.value = '';
-    });
+    inputEl.value = '';
 
     throw new Error(`${err.name}(${err.code}): ${err.message}`);
   }
