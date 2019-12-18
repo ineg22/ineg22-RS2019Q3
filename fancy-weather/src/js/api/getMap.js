@@ -73,7 +73,9 @@ export async function getGeocode(val, lang) {
     return myGeocode;
   } catch (err) {
     err.name = 'getGeocode API Error';
-    err.message = `just yandex. value: ${val}, lang: ${lang}`;
+    err.message = `just yandex. value: ${val}, 
+    lang: ${lang}, 
+    message: ${err.message}`;
     renderError(err);
     throw new Error(`${err.name}(${err.code}): ${err.message}`);
   }

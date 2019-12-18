@@ -1,8 +1,7 @@
 import renderWeather from './renderWeather.js'; // forecast-full
 import renderForm from './renderForm.js'; // lang, meas
 import renderMap from './renderMap.js';
-
-import { getDateTime, showBG } from '../utils.js';
+import { getDateTime, showBG, setAnimatedIcons } from '../utils.js';
 
 export default async function renderFrame(url, forecast, location, lang, meas) {
   const { body } = document;
@@ -15,6 +14,7 @@ export default async function renderFrame(url, forecast, location, lang, meas) {
   body.innerHTML = '';
   body.appendChild(wrapper);
 
+  setAnimatedIcons(forecast);
   showBG(url);
 
   const dateTime = document.querySelector('.date-time');

@@ -1,3 +1,5 @@
+import '../../../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
+
 import MAP from '../MAP.js';
 
 export default function renderForm(lang = 'en', meas = 'C') {

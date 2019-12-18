@@ -1,7 +1,5 @@
 import '../styles/main.scss';
 import '../styles/bootstrap.min.css';
-import '../../node_modules/weather-icons/css/weather-icons.min.css';
-import '../../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
 
 import getUserLocation from './api/getLocation.js';
 import getImageURL from './api/getImageURL.js';

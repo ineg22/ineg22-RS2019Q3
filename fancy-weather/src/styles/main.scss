@@ -141,6 +141,9 @@ body {
   }
 
   .forecast-current {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-size: 6rem;
   }
 
@@ -153,7 +156,6 @@ body {
     flex-wrap: wrap;
     justify-content: space-around;
     width: 100%;
-    margin-bottom: 15px;
 
     font-size: 1rem;
   }
@@ -163,7 +165,6 @@ body {
     flex-wrap: wrap;
     justify-content: space-around;
     width: 100%;
-    margin-bottom: 10px;
 
     font-size: 1.5rem;
   }
@@ -174,11 +175,12 @@ body {
 
   .forecast-detail__wind,
   .forecast-detail__feels {
-    margin-right: 15px;
+    margin: 0 15px 15px 0;
   }
 
   .forecast-daily__day {
     text-align: center;
+    margin: 0 10px 10px 0;
   }
 
   .forecast-daily__week-day {

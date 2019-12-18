@@ -1,4 +1,5 @@
 import MAP from './MAP.js';
+import SkyconsContructor from '../../node_modules/skycons/skycons.js';
 
 export function getRandomNumber(num) {
   if (!num || typeof num !== 'number' || num < 0) {
@@ -61,7 +62,7 @@ export function getTags(curr) {
   const month = date.getMonth();
   const hours = date.getHours();
 
-  const weather = MAP.icon[icon][1];
+  const weather = MAP.icon[icon];
 
   let dayTime;
   if (hours >= 6 && hours <= 9) {
@@ -119,4 +120,24 @@ export function convertDDToDMS(deg) {
   }
 
   return `${dir}${d}° ${m}' ${s}"`;
+}
+
+export function setAnimatedIcons(forecast) {
+  const Skycons = SkyconsContructor(window);
+  const skycons = new Skycons({ color: 'white', resizeClear: true });
+
+  skycons.add('icon-main', forecast.currently.icon);
+  skycons.add(
+    document.querySelector('.icon-daily-0'),
+    forecast.daily.data[0].icon
+  );
+  skycons.add(
+    document.querySelector('.icon-daily-1'),
+    forecast.daily.data[1].icon
+  );
+  skycons.add(
+    document.querySelector('.icon-daily-2'),
+    forecast.daily.data[2].icon
+  );
+  skycons.play();
 }

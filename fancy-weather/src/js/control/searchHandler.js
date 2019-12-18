@@ -6,7 +6,13 @@ import { mapPanTo } from '../api/getMap.js';
 import renderWeather from '../view/renderWeather.js';
 import renderError from '../view/renderError.js';
 
-import { getDateTime, getTags, showBG, convertDDToDMS } from '../utils.js';
+import {
+  getDateTime,
+  getTags,
+  showBG,
+  convertDDToDMS,
+  setAnimatedIcons,
+} from '../utils.js';
 import MAP from '../MAP.js';
 
 export default async function searchHandler(e, map, meas, timeInterval, tags) {
@@ -48,6 +54,8 @@ export default async function searchHandler(e, map, meas, timeInterval, tags) {
   const weatherWrap = await renderWeather(forecast, location, lang, meas);
 
   forecastWrapper.replaceWith(weatherWrap);
+
+  setAnimatedIcons(forecast);
 
   const timeZone = await getTimezone(location);
 

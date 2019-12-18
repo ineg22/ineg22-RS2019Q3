@@ -53,9 +53,11 @@ export default async function renderWeather(
   forecastShort.classList.add('forecast-short');
   forecastShort.textContent = langArray.weather[currently.icon];
 
-  const mainIcon = document.createElement('i');
-  const mainIconName = MAP.icon[currently.icon][0];
-  mainIcon.classList.value = `wi ${mainIconName} icon-main`;
+  const mainIcon = document.createElement('canvas');
+  mainIcon.classList.add('icon-main');
+  mainIcon.setAttribute('id', 'icon-main');
+  mainIcon.setAttribute('width', '128');
+  mainIcon.setAttribute('height', '128');
 
   const forecastCurrent = document.createElement('div');
   forecastCurrent.classList.add('forecast-current');
@@ -128,9 +130,10 @@ export default async function renderWeather(
     spanTempLow.classList.add('forecast-daily__temp-low');
     spanTempLow.textContent = `${temperatureLow}°`;
 
-    const icon = document.createElement('i');
-    const iconName = MAP.icon[daily.data[i].icon][0];
-    icon.classList.value = `wi ${iconName} forecast-daily__icon`;
+    const icon = document.createElement('canvas');
+    icon.classList.add(`icon-daily-${i}`);
+    icon.setAttribute('width', '64');
+    icon.setAttribute('height', '64');
 
     el.append(spanDay, icon, spanTempHight, spanTempLow);
     fragment.appendChild(el);
