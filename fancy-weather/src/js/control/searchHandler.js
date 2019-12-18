@@ -6,7 +6,7 @@ import { mapPanTo } from '../api/getMap.js';
 import renderWeather from '../view/renderWeather.js';
 import renderError from '../view/renderError.js';
 
-import { getDateTime, getTags, showBG } from '../utils.js';
+import { getDateTime, getTags, showBG, convertDDToDMS } from '../utils.js';
 import MAP from '../MAP.js';
 
 export default async function searchHandler(e, map, meas, timeInterval, tags) {
@@ -28,11 +28,11 @@ export default async function searchHandler(e, map, meas, timeInterval, tags) {
 
   document.querySelector('.latitude').textContent = `${
     MAP[lang].other[2]
-  }: ${coords[0].toFixed(2)}`;
+  }: ${convertDDToDMS(coords[0])}`;
 
   document.querySelector('.longitude').textContent = `${
     MAP[lang].other[3]
-  }: ${coords[1].toFixed(2)}`;
+  }: ${convertDDToDMS(coords[1])}`;
 
   const forecastWrapper = document.querySelector('.forecast-wrapper');
   forecastWrapper.innerHTML = '';

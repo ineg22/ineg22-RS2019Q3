@@ -91,3 +91,32 @@ export function getTags(curr) {
 export function showBG(url) {
   document.body.style.background = `url("${url}") center / cover no-repeat`;
 }
+
+export function convertDDToDMS(deg) {
+  if (typeof deg !== 'number') {
+    throw new Error('invalid arguments');
+  }
+
+  let dir = '';
+  if (deg < 0) {
+    dir = '-';
+  }
+
+  let d = parseInt(deg, 10);
+  const minFloat = Math.abs((deg - d) * 60);
+  let m = Math.floor(minFloat);
+  const secFloat = (minFloat - m) * 60;
+  let s = Math.round(secFloat);
+  d = Math.abs(d);
+
+  if (s === 60) {
+    m += 1;
+    s = 0;
+  }
+  if (m === 60) {
+    d += 1;
+    m = 0;
+  }
+
+  return `${dir}${d}° ${m}' ${s}"`;
+}

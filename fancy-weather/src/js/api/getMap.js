@@ -1,6 +1,7 @@
 import ymaps from 'ymaps';
 import MAP from '../MAP.js';
 import renderError from '../view/renderError.js';
+import { convertDDToDMS } from '../utils.js';
 
 async function getMaps(lang) {
   let langFormatted;
@@ -44,11 +45,11 @@ export default async function getMap(loc, lang) {
 
     document.querySelector('.latitude').textContent = `${
       MAP[lang].other[2]
-    }: ${latitude.toFixed(2)}`;
+    }: ${convertDDToDMS(latitude)}`;
 
     document.querySelector('.longitude').textContent = `${
       MAP[lang].other[3]
-    }: ${longitude.toFixed(2)}`;
+    }: ${convertDDToDMS(longitude)}`;
 
     const map = new maps.Map('map', {
       center: [latitude, longitude],
