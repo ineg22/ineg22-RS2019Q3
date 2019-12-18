@@ -26,10 +26,15 @@ export default async function searchHandler(e, map, meas, timeInterval, tags) {
     return { timeInterval, tags };
   }
 
-  clearInterval(timeInterval);
-
   const lang = document.querySelector('.lang-select').value.toLowerCase();
   const coords = await mapPanTo(map, lang);
+
+  if (!coords) {
+    return { timeInterval, tags };
+  }
+
+  clearInterval(timeInterval);
+
   const location = { latitude: coords[0], longitude: coords[1] };
 
   document.querySelector('.latitude').textContent = `${

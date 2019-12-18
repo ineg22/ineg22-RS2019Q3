@@ -73,7 +73,8 @@ export async function getGeocode(val, lang) {
     return myGeocode;
   } catch (err) {
     err.name = 'getGeocode API Error';
-    err.message = `just yandex. value: ${val}, 
+    err.message = `just yandex. 
+    value: ${val}, 
     lang: ${lang}, 
     message: ${err.message}`;
     renderError(err);
@@ -99,6 +100,6 @@ export async function mapPanTo(map, lang) {
     renderError(err);
     inputEl.value = '';
 
-    throw new Error(`${err.name}(${err.code}): ${err.message}`);
+    return '';
   }
 }
