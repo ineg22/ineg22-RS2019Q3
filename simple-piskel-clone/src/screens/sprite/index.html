@@ -9,8 +9,106 @@
 </head>
 
 <body>
-  <h3>new sprite</h3>
-  <a href="./">landing</a>
+  <header class="header">
+    <h2>PISKEL</h2>
+    <span>new sprite*</span>
+    <div class="links">
+      <a href="#" class="header-link">sign in</a>
+      <a href="./" class="header-link">landing</a>
+    </div>
+  </header>
+  <main class="main">
+    <div class="tools">
+      <ul class="pixel-list" title="pen size from 1 to 4 px">
+        <li class="pixel-item pen-size-1">
+          <div class="pixel-1"></div>
+        </li>
+        <li class="pixel-item pen-size-2">
+          <div class="pixel-2"></div>
+        </li>
+        <li class="pixel-item pen-size-3">
+          <div class="pixel-3"></div>
+        </li>
+        <li class="pixel-item pen-size-4">
+          <div class="pixel-4"></div>
+        </li>
+      </ul>
+      <ul class="tools-list">
+        <li class="tools-item pen" title="click 'P' to select pen tool"></li>
+        <li class="tools-item stroke" title="click 'S' to select stroke tool"></li>
+        <li class="tools-item bucket" title="click 'B' to select bucket tool"></li>
+        <li class="tools-item unicolor" title="click 'U' to select unicolor tool"></li>
+        <li class="tools-item eraser" title="click 'E' to select eraser tool"></li>
+        <li class="tools-item picker" title="click 'C' to select color picker tool"></li>
+      </ul>
+      <div class="color-tools">
+        <input type="color" id="color-input" class="color-input">
+        <label for="color-input" title="click to select color">
+          <div class="current-color"></div>
+        </label>
+        <div class="prev-color" title="click to swap colors"></div>
+        <div class="swap-colors" title="click to swap colors"></div>
+      </div>
+    </div>
+    <div class="frames">
+      <ul class="mini-frame-list">
+        <li class="mini-frame mini-frame-1">
+          <canvas class="mini-frame__canvas"></canvas>
+          <div class="mini-frame__counter">1</div>
+          <div class="mini-frame__clone" title="click to copy frame"></div>
+          <div class="mini-frame__delete" title="click to delete frame"></div>
+          <div class="mini-frame__dragndrop" title="click to move frame"></div>
+        </li>
+        <li class="mini-frame mini-frame-1">
+          <canvas class="mini-frame__canvas"></canvas>
+          <div class="mini-frame__counter">2</div>
+          <div class="mini-frame__clone" title="click to copy frame"></div>
+          <div class="mini-frame__delete" title="click to delete frame"></div>
+          <div class="mini-frame__dragndrop" title="click to move frame"></div>
+        </li>
+        <li class="mini-frame mini-frame-1">
+          <canvas class="mini-frame__canvas"></canvas>
+          <div class="mini-frame__counter">3</div>
+          <div class="mini-frame__clone" title="click to copy frame"></div>
+          <div class="mini-frame__delete" title="click to delete frame"></div>
+          <div class="mini-frame__dragndrop" title="click to move frame"></div>
+        </li>
+        <li class="mini-frame mini-frame-1">
+          <canvas class="mini-frame__canvas"></canvas>
+          <div class="mini-frame__counter">4</div>
+          <div class="mini-frame__clone" title="click to copy frame"></div>
+          <div class="mini-frame__delete" title="click to delete frame"></div>
+          <div class="mini-frame__dragndrop" title="click to move frame"></div>
+        </li>
+        <div id="mini-frame__add" class="mini-frame__add">
+          <div class="mini-frame__add-icon"></div>
+          <span>Add new frame</span>
+        </div>
+      </ul>
+    </div>
+    <div class="work-area">
+      <canvas id="main-frame" class="main-frame"></canvas>
+    </div>
+    <div class="result">
+      <div class="preview"></div>
+      <h4 class="result-headers">preview fps</h4>
+      <div class="fps-wrapper">
+        <span id="fps-display" class="fps-display">2 FPS</span>
+        <input id="fps-input" class="fps-input" type="range" min="1" max="24" value="2">
+      </div>
+      <h4 class="result-headers">sprite resolution</h4>
+      <div class="resolution-wrapper">
+        <div class="resolution-item resolution-32">32x32</div>
+        <div class="resolution-item resolution-64">64x64</div>
+        <div class="resolution-item resolution-128">128x128</div>
+      </div>
+      <h4 class="result-headers">export</h4>
+      <div class="export-wrapper">
+        <div class="export-item">apng</div>
+        <div class="export-item">gif</div>
+      </div>
+    </div>
+  </main>
 </body>
 
 </html>

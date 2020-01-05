@@ -21,15 +21,15 @@ module.exports = {
           use: ['css-loader', 'sass-loader'],
         }),
       },
-      // {
-      //   test: /\.(png|jpg)$/,
-      //   use: {
-      //     loader: 'file-loader',
-      //     options: {
-      //       outputPath: 'assets',
-      //     },
-      //   },
-      // },
+      {
+        test: /\.(png|jpg)$/,
+        use: {
+          loader: 'file-loader',
+          options: {
+            outputPath: 'assets',
+          },
+        },
+      },
       // {
       //   test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
       //   use: {

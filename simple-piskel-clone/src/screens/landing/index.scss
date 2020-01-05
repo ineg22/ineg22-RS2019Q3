@@ -1,7 +1,58 @@
-h1 {
-  color: green;
+body {
+  margin: 0;
+
+  color: white;
+
+  background-color: rgb(45, 45, 45);
 }
 
-h2 {
-  color: yellowgreen;
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 5vh;
+  padding: 10px 30px;
+}
+
+.sprite-link {
+  padding: 5px;
+
+  color: black;
+  text-decoration: none;
+
+  background-color: rgb(255, 215, 0);
+  border-radius: 3px;
+
+  transition: all linear 0.1s;
+
+  &:hover {
+    background-color: white;
+  }
+}
+
+.main {
+  height: 80vh;
+  margin-left: 30px;
+}
+
+.footer {
+  height: 5vh;
+}
+
+.contact-link {
+  float: right;
+  margin: 10px;
+  padding: 2px 5px;
+
+  color: black;
+  text-decoration: none;
+
+  background-color: white;
+  border-radius: 3px;
+
+  transition: all linear 0.1s;
+
+  &:hover {
+    background-color: rgb(255, 215, 0);
+  }
 }
