@@ -1,5 +1,8 @@
 export default function getSessionData() {
   if (!localStorage.getItem('currentTool')) {
+    const canvas = document.querySelector('#main-frame');
+
+    localStorage.setItem('canvasData', canvas.toDataURL());
     localStorage.setItem('currentTool', 'pen');
     localStorage.setItem('penSize', '2');
     localStorage.setItem('currentColor', 'rgb(0, 0, 0)');
@@ -15,6 +18,7 @@ export default function getSessionData() {
     prevColor: localStorage.getItem('prevColor'),
     resolution: localStorage.getItem('resolution'),
     fps: localStorage.getItem('fps'),
+    canvasData: localStorage.getItem('canvasData'),
     // frames: localStorage.getItem('frames'),
   };
 

@@ -1,3 +1,5 @@
+import { setPixelSize } from '../../utils.js';
+
 export default function onPixelSizeClickHandler(e) {
   const penSize = localStorage.getItem('penSize');
   const penSizeElement = document.querySelector(`.pen-size-${penSize}`);
@@ -9,4 +11,6 @@ export default function onPixelSizeClickHandler(e) {
   newPenSizeElement.classList.toggle('selected');
 
   localStorage.setItem('penSize', newPenSize);
+
+  setPixelSize();
 }

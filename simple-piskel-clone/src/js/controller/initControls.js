@@ -4,6 +4,7 @@ import onPixelSizeClickHandler from './UI/onPixelSizeClickHandler.js';
 import onResolutionClickHandler from './UI/onResolutionClickHandler.js';
 import onSwapColorClickHandler from './UI/onSwapColorClickHandler.js';
 import onToolClickHandler from './UI/onToolClickHandler.js';
+import initCanvasListeners from './canvas/initCanvasListeners.js';
 
 export default function initControls() {
   document
@@ -33,4 +34,11 @@ export default function initControls() {
   document
     .querySelector('#fps-input')
     .addEventListener('input', onFpsInputHandler);
+
+  window.addEventListener('beforeunload', () => {
+    const canvas = document.querySelector('#main-frame');
+    localStorage.setItem('canvasData', canvas.toDataURL());
+  });
+
+  initCanvasListeners();
 }

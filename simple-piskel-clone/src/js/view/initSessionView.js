@@ -1,3 +1,5 @@
+import { setPixelSize } from '../utils.js';
+
 export default function initSessionView({
   currentTool,
   penSize,
@@ -5,6 +7,7 @@ export default function initSessionView({
   prevColor,
   resolution,
   fps,
+  canvasData,
 }) {
   const currentToolElement = document.querySelector(`.${currentTool}`);
   const currentPenSizeElement = document.querySelector(`.pen-size-${penSize}`);
@@ -13,6 +16,15 @@ export default function initSessionView({
   const prevColorElement = document.querySelector('.prev-color');
   const fpsInputElement = document.querySelector('#fps-input');
   const fpsDisplayElement = document.querySelector('#fps-display');
+  const canvas = document.querySelector('#main-frame');
+  const ctx = canvas.getContext('2d');
+
+  const img = new Image();
+
+  img.src = canvasData;
+  img.onload = () => {
+    ctx.drawImage(img, 0, 0);
+  };
 
   currentToolElement.classList.add('selected');
   currentPenSizeElement.classList.add('selected');
@@ -21,4 +33,6 @@ export default function initSessionView({
   prevColorElement.style.backgroundColor = prevColor;
   fpsInputElement.setAttribute('value', fps);
   fpsDisplayElement.textContent = `${fps} FPS`;
+
+  setPixelSize();
 }

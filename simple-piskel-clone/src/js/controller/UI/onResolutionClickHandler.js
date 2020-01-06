@@ -1,3 +1,5 @@
+import { setPixelSize } from '../../utils.js';
+
 export default function onResolutionClickHandler(e) {
   const resolution = localStorage.getItem('resolution');
   const resolutionElement = document.querySelector(`.resolution-${resolution}`);
@@ -8,4 +10,6 @@ export default function onResolutionClickHandler(e) {
   newResolutionElement.classList.toggle('selected');
 
   localStorage.setItem('resolution', newResolution);
+
+  setPixelSize();
 }
