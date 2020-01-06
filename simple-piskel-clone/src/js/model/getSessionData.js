@@ -1,4 +1,4 @@
-export default function getSession() {
+export default function getSessionData() {
   if (!localStorage.getItem('currentTool')) {
     localStorage.setItem('currentTool', 'pen');
     localStorage.setItem('penSize', '2');
@@ -18,6 +18,5 @@ export default function getSession() {
     // frames: localStorage.getItem('frames'),
   };
 
-  console.log('getSession');
   return session;
 }

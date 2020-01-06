@@ -1,4 +1,4 @@
-export default function initSessionData({
+export default function initSessionView({
   currentTool,
   penSize,
   currentColor,
@@ -21,6 +21,4 @@ export default function initSessionData({
   prevColorElement.style.backgroundColor = prevColor;
   fpsInputElement.setAttribute('value', fps);
   fpsDisplayElement.textContent = `${fps} FPS`;
-
-  console.log('initSessionData');
 }
