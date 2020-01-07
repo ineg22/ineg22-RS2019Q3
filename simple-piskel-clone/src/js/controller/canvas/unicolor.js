@@ -1,3 +1,5 @@
+import updateMiniFrame from '../UI/miniFrame/updateMiniFrame.js';
+
 export default function unicolor(e) {
   const MIN_STEP_SIZE = 4;
   const DEFAULT_CANVAS_SIZE = 512;
@@ -21,4 +23,6 @@ export default function unicolor(e) {
       }
     }
   }
+
+  updateMiniFrame();
 }

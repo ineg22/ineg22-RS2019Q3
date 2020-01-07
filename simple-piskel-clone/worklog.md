@@ -5,3 +5,7 @@
 | Jan 05 18:00 | Jan 05 20:00 | 2h         | base controls                               |
 | Jan 06 14:00 | Jan 06 15:30 | 1.5h       | base controls + html /css                   |
 | Jan 06 17:30 | Jan 06 19:30 | 2h         | add pen,bucket,unicolor,picker,eraser tools |
+| Jan 07 15:00 | Jan 07 17:00 | 2h         | add stroke tool, refactor tools/model       |
+| Jan 07 17:00 | Jan 07 21:00 | 4h         | create frames, model refactor               |
+| ---          | ---          | ---        | ---                                         |
+| Jan 04       | Jan 07       | 16.5h      | total                                       |

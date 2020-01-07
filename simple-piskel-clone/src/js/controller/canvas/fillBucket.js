@@ -1,3 +1,5 @@
+import updateMiniFrame from '../UI/miniFrame/updateMiniFrame.js';
+
 export default function fillBucket(e) {
   const canvas = document.querySelector('#main-frame');
   const ctx = canvas.getContext('2d');
@@ -33,8 +35,14 @@ export default function fillBucket(e) {
     }
   }
 
-  floodFill(
-    Math.floor(lastX / pixelSize) * pixelSize,
-    Math.floor(lastY / pixelSize) * pixelSize
-  );
+  try {
+    floodFill(
+      Math.floor(lastX / pixelSize) * pixelSize,
+      Math.floor(lastY / pixelSize) * pixelSize
+    );
+    updateMiniFrame();
+  } catch (err) {
+    updateMiniFrame();
+    throw new Error(err);
+  }
 }

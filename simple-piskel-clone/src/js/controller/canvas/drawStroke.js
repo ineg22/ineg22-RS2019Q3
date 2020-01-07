@@ -1,3 +1,5 @@
+import updateMiniFrame from '../UI/miniFrame/updateMiniFrame.js';
+
 const canvas = document.querySelector('#main-frame');
 const ctx = canvas.getContext('2d');
 
@@ -46,6 +48,7 @@ function drawing(evt) {
 }
 
 function clearListeners() {
+  updateMiniFrame();
   canvas.removeEventListener('mousemove', drawing);
   window.removeEventListener('mouseup', clearListeners);
 }

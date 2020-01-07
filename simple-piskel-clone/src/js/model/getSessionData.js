@@ -5,10 +5,12 @@ export default function getSessionData() {
     localStorage.setItem('canvasData', canvas.toDataURL());
     localStorage.setItem('currentTool', 'pen');
     localStorage.setItem('penSize', '2');
-    localStorage.setItem('currentColor', 'rgb(0, 0, 0)');
+    localStorage.setItem('currentColor', 'rgb(0, 0, 1)');
     localStorage.setItem('prevColor', 'rgb(255, 215, 0)');
     localStorage.setItem('resolution', '64');
     localStorage.setItem('fps', '4');
+    localStorage.setItem('frames', JSON.stringify([]));
+    localStorage.setItem('currentFrame', '1');
   }
 
   const session = {
@@ -19,7 +21,8 @@ export default function getSessionData() {
     resolution: localStorage.getItem('resolution'),
     fps: localStorage.getItem('fps'),
     canvasData: localStorage.getItem('canvasData'),
-    // frames: localStorage.getItem('frames'),
+    frames: JSON.parse(localStorage.getItem('frames')),
+    currentFrame: localStorage.getItem('currentFrame'),
   };
 
   return session;

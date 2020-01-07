@@ -1,3 +1,5 @@
+import updateMiniFrame from '../UI/miniFrame/updateMiniFrame.js';
+
 export default function eraser(e) {
   const canvas = document.querySelector('#main-frame');
   const ctx = canvas.getContext('2d');
@@ -43,6 +45,8 @@ export default function eraser(e) {
   }
 
   function clearListeners() {
+    updateMiniFrame();
+
     canvas.removeEventListener('mousemove', clearing);
     window.removeEventListener('mouseup', clearListeners);
   }
