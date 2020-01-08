@@ -5,7 +5,13 @@ import onResolutionClickHandler from './UI/onResolutionClickHandler.js';
 import onSwapColorClickHandler from './UI/onSwapColorClickHandler.js';
 import onToolClickHandler from './UI/onToolClickHandler.js';
 import onMiniFrameAddHandler from './UI/onMiniFrameAddHandler.js';
+import onMiniFrameClickHandler from './UI/miniFrame/onMiniFrameClickHandler.js';
 import initCanvasListeners from './canvas/initCanvasListeners.js';
+import {
+  onDragStartHandler,
+  onDragOverHandler,
+  onDropHandler,
+} from './UI/miniFrame/moveFrame.js';
 
 export default function initControls() {
   document
@@ -40,10 +46,18 @@ export default function initControls() {
     .querySelector('.mini-frame__add')
     .addEventListener('click', onMiniFrameAddHandler);
 
-  // window.addEventListener('beforeunload', () => {
-  //   const canvas = document.querySelector('#main-frame');
-  //   localStorage.setItem('canvasData', canvas.toDataURL());
-  // });
+  document
+    .querySelector('.mini-frame-list')
+    .addEventListener('click', onMiniFrameClickHandler);
+
+  document.addEventListener('dragstart', onDragStartHandler);
+  document.addEventListener('dragover', onDragOverHandler);
+  document.addEventListener('drop', onDropHandler);
+
+  window.addEventListener('beforeunload', () => {
+    const canvas = document.querySelector('#main-frame');
+    localStorage.setItem('canvasData', JSON.stringify(canvas.toDataURL()));
+  });
 
   initCanvasListeners();
 }

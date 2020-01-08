@@ -19,6 +19,7 @@ export default function renderMiniFrame(count) {
   canvasElement.classList.add('mini-frame__canvas');
   canvasElement.setAttribute('width', '512');
   canvasElement.setAttribute('height', '512');
+  canvasElement.setAttribute('draggable', 'true');
 
   const miniFrameElement = document.createElement('li');
   miniFrameElement.classList.value = `mini-frame mini-frame-${count + 1}`;

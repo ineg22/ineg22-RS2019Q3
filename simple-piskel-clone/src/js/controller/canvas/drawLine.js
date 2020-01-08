@@ -4,6 +4,7 @@ const canvas = document.querySelector('#main-frame');
 const ctx = canvas.getContext('2d');
 let currentColor;
 let pixelSize;
+let isEraser = false;
 
 let lastX;
 let lastY;
@@ -29,12 +30,21 @@ function drawing(evt) {
       err += deltaX;
       lastY += sy;
     }
-    ctx.fillRect(
-      Math.floor(lastX / pixelSize) * pixelSize,
-      Math.floor(lastY / pixelSize) * pixelSize,
-      pixelSize,
-      pixelSize
-    );
+    if (isEraser) {
+      ctx.clearRect(
+        Math.floor(lastX / pixelSize) * pixelSize,
+        Math.floor(lastY / pixelSize) * pixelSize,
+        pixelSize,
+        pixelSize
+      );
+    } else {
+      ctx.fillRect(
+        Math.floor(lastX / pixelSize) * pixelSize,
+        Math.floor(lastY / pixelSize) * pixelSize,
+        pixelSize,
+        pixelSize
+      );
+    }
   }
 }
 
@@ -45,17 +55,31 @@ function clearListeners() {
 }
 
 export default function drawLine(e) {
-  lastX = e.offsetX;
-  lastY = e.offsetY;
+  const currentTool = localStorage.getItem('currentTool');
   currentColor = localStorage.getItem('currentColor');
   pixelSize = localStorage.getItem('pixelSize');
   ctx.fillStyle = currentColor;
-  ctx.fillRect(
-    Math.floor(lastX / pixelSize) * pixelSize,
-    Math.floor(lastY / pixelSize) * pixelSize,
-    pixelSize,
-    pixelSize
-  );
+
+  lastX = e.offsetX;
+  lastY = e.offsetY;
+
+  if (currentTool === 'eraser') {
+    isEraser = true;
+    ctx.clearRect(
+      Math.floor(lastX / pixelSize) * pixelSize,
+      Math.floor(lastY / pixelSize) * pixelSize,
+      pixelSize,
+      pixelSize
+    );
+  } else {
+    isEraser = false;
+    ctx.fillRect(
+      Math.floor(lastX / pixelSize) * pixelSize,
+      Math.floor(lastY / pixelSize) * pixelSize,
+      pixelSize,
+      pixelSize
+    );
+  }
 
   canvas.addEventListener('mousemove', drawing);
   window.addEventListener('mouseup', clearListeners);

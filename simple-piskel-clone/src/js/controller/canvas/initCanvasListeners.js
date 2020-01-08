@@ -1,5 +1,4 @@
 import drawLine from './drawLine.js';
-import eraser from './eraser.js';
 import drawStroke from './drawStroke.js';
 import fillBucket from './fillBucket.js';
 import colorPicker from './colorPicker.js';
@@ -9,7 +8,7 @@ const canvas = document.querySelector('#main-frame');
 
 function clearCanvasListeners() {
   canvas.removeEventListener('mousedown', drawLine);
-  canvas.removeEventListener('mousedown', eraser);
+  canvas.removeEventListener('mousedown', drawLine);
   canvas.removeEventListener('mousedown', drawStroke);
   canvas.removeEventListener('click', fillBucket);
   canvas.removeEventListener('click', colorPicker);
@@ -25,7 +24,7 @@ export default function initCanvasListeners() {
       canvas.addEventListener('mousedown', drawLine);
       break;
     case 'eraser':
-      canvas.addEventListener('mousedown', eraser);
+      canvas.addEventListener('mousedown', drawLine);
       break;
     case 'stroke':
       canvas.addEventListener('mousedown', drawStroke);

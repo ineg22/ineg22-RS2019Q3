@@ -1,10 +1,11 @@
 import updateMiniFrame from '../UI/miniFrame/updateMiniFrame.js';
 
 export default function fillBucket(e) {
+  const CANVAS_DEFAULT_SIZE = 512;
   const canvas = document.querySelector('#main-frame');
   const ctx = canvas.getContext('2d');
   const currentColor = localStorage.getItem('currentColor');
-  const pixelSize = localStorage.getItem('pixelSize');
+  const pixelSize = Number(localStorage.getItem('pixelSize'));
 
   const targetColorArr = ctx.getImageData(e.offsetX, e.offsetY, 1, 1).data;
   const targetColor = `rgb(${targetColorArr[0]}, ${targetColorArr[1]}, ${targetColorArr[2]})`;
@@ -27,11 +28,11 @@ export default function fillBucket(e) {
     if (y > 0) {
       floodFill(x, y - pixelSize);
     }
-    if (x < 512) {
-      floodFill(x + +pixelSize, y);
+    if (x < CANVAS_DEFAULT_SIZE - pixelSize) {
+      floodFill(x + pixelSize, y);
     }
-    if (y < 512) {
-      floodFill(x, y + +pixelSize);
+    if (y < CANVAS_DEFAULT_SIZE - pixelSize) {
+      floodFill(x, y + pixelSize);
     }
   }
 

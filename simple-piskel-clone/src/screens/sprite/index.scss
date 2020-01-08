@@ -266,14 +266,22 @@ body {
   &:hover {
     border: 2px solid rgb(255, 215, 0);
     cursor: default;
+
+    .mini-frame__clone,
+    .mini-frame__delete,
+    .mini-frame__dragndrop {
+      display: block;
+    }
   }
 }
+
 
 .mini-frame__canvas {
   width: 100%;
   height: 100%;
 
   background: url("./assets/canvas-background.png");
+  cursor: pointer;
 }
 
 .mini-frame__counter {
@@ -290,7 +298,9 @@ body {
   color: black;
 
   background-color: rgb(255, 215, 0);
-  cursor: default;
+
+  user-select: none;
+  pointer-events: none;
 }
 
 .mini-frame__clone {
@@ -298,24 +308,25 @@ body {
   bottom: 73px;
   left: 69px;
 
+  display: none;
   width: 25px;
   height: 25px;
+  overflow: hidden;
 
   background-color: gray;
   border-bottom: 2px solid gray;
   border-left: 2px solid gray;
-  overflow: hidden;
+  cursor: pointer;
 
   &:hover {
     border-color: rgb(255, 215, 0);
-    cursor: pointer;
   }
 
   &::before {
+    content: url("./assets/icons.png");
     position: relative;
     right: 276px;
     bottom: 78px;
-    content: url("./assets/icons.png");
   }
 }
 
@@ -324,24 +335,25 @@ body {
   bottom: 0;
   left: 69px;
 
+  display: none;
   width: 25px;
   height: 25px;
+  overflow: hidden;
 
   background-color: gray;
   border-top: 2px solid gray;
   border-left: 2px solid gray;
-  overflow: hidden;
+  cursor: pointer;
 
   &:hover {
     border-color: rgb(255, 215, 0);
-    cursor: pointer;
   }
 
   &::before {
+    content: url("./assets/icons.png");
     position: relative;
     right: 276px;
     bottom: 109px;
-    content: url("./assets/icons.png");
   }
 }
 
@@ -350,24 +362,26 @@ body {
   bottom: 0;
   left: 0;
 
+  display: none;
   width: 25px;
   height: 25px;
+  overflow: hidden;
 
   background-color: gray;
   border-top: 2px solid gray;
   border-right: 2px solid gray;
-  overflow: hidden;
+
+  pointer-events: none;
 
   &:hover {
     border-color: rgb(255, 215, 0);
-    cursor: move;
   }
 
   &::before {
+    content: url("./assets/icons.png");
     position: relative;
     right: 276px;
     bottom: 49px;
-    content: url("./assets/icons.png");
   }
 }
 
@@ -377,9 +391,11 @@ body {
   width: 96px;
   height: 48px;
 
+  background-color: black;
   border: 2px solid gray;
   border-radius: 3px;
-  background-color: black;
+
+  user-select: none;
 
   &:hover {
     border-color: rgb(255, 215, 0);
@@ -395,10 +411,10 @@ body {
   overflow: hidden;
 
   &::before {
+    content: url("./assets/icons.png");
     position: relative;
     right: 276px;
     bottom: 160px;
-    content: url("./assets/icons.png");
   }
 }
 
@@ -471,6 +487,8 @@ body {
   border: 2px solid black;
   border-radius: 5px;
 
+  user-select: none;
+
   &:hover {
     border: 2px solid rgb(255, 215, 0);
     cursor: pointer;
@@ -494,6 +512,8 @@ body {
 
   transition: all linear 0.1s;
 
+  user-select: none;
+
   &:hover {
     background-color: white;
     cursor: pointer;
@@ -502,6 +522,10 @@ body {
 
 .selected {
   border-color: rgb(255, 215, 0);
+}
+
+.over {
+  border-color: red;
 }
 
 @media (max-width: 890px) {
