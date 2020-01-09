@@ -6,6 +6,7 @@ import onSwapColorClickHandler from './UI/onSwapColorClickHandler.js';
 import onToolClickHandler from './UI/onToolClickHandler.js';
 import onMiniFrameAddHandler from './UI/onMiniFrameAddHandler.js';
 import onMiniFrameClickHandler from './UI/miniFrame/onMiniFrameClickHandler.js';
+import fullScreenHandler from './preview/fullScreenHandler.js';
 import initCanvasListeners from './canvas/initCanvasListeners.js';
 import {
   onDragStartHandler,
@@ -49,6 +50,9 @@ export default function initControls() {
   document
     .querySelector('.mini-frame-list')
     .addEventListener('click', onMiniFrameClickHandler);
+  document
+    .querySelector('.fullscreen')
+    .addEventListener('click', fullScreenHandler);
 
   document.addEventListener('dragstart', onDragStartHandler);
   document.addEventListener('dragover', onDragOverHandler);

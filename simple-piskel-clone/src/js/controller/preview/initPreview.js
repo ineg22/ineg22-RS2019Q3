@@ -34,8 +34,8 @@ export default function initPreview() {
     const framesCount = JSON.parse(localStorage.getItem('frames')).length;
     let currTempFrame = Number(localStorage.getItem('tempFrame'));
 
-    if (currTempFrame === framesCount) {
-      currTempFrame -= framesCount;
+    if (currTempFrame === framesCount || currTempFrame > framesCount) {
+      currTempFrame = 0;
     }
 
     drawPreviewFrame(currTempFrame);

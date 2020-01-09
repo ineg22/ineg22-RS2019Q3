@@ -10,6 +10,6 @@
 | Jan 08 14:00 | Jan 08 18:00 | 4h         | frames copy, delete, select                    |
 | Jan 08 21:00 | Jan 08 23:30 | 2.5h       | frames move + fix bug with empty canvas stroke |
 | Jan 09 13:00 | Jan 09 15:00 | 2h         | bug fixing, minor html/css changes             |
-| Jan 09 15:00 | Jan 09       |            |                                                |
+| Jan 09 16:00 | Jan 09 19:00 | 3h         | preview animation + full screen + fps          |
 | ---          | ---          | ---        | ---                                            |
 | Jan 04       | Jan          | 0h         | total                                          |

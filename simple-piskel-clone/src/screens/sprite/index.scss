@@ -238,9 +238,25 @@ body {
 }
 
 .frames {
-  min-width: 100px;
-  height: 100%;
+  min-width: 110px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 100vh;
   margin-right: 10px;
+
+  &::-webkit-scrollbar {
+    position: absolute;
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
+  }
 }
 
 .mini-frame-list {
@@ -421,7 +437,6 @@ body {
 
 .work-area {
   width: calc(100% - 300px);
-  height: 100%;
   margin-right: 5px;
 }
 
@@ -452,6 +467,8 @@ body {
 }
 
 .preview {
+  position: relative;
+
   width: 100%;
   height: 200px;
 
@@ -461,16 +478,41 @@ body {
 .preview-canvas {
   width: 100%;
   height: 200px;
+
+  &:-webkit-full-screen {
+    background: url("./assets/canvas-background.png");
+  }
 }
 
-.play-pause {
+.fullscreen {
   position: absolute;
+  right: 0;
 
-  padding: 3px;
+  width: 15px;
+  height: 15px;
 
-  border: 1px solid rgb(255, 215, 0);
-  border-radius: 3px;
+  background-color: gray;
+  border: 2px solid white;
   cursor: pointer;
+  overflow: hidden;
+
+  &:hover {
+    border-color: rgb(255, 215, 0);
+
+    &::before {
+      content: url("./assets/icons.png");
+      position: relative;
+      right: 292px;
+      bottom: 207px;
+    }
+  }
+
+  &::before {
+    content: url("./assets/icons.png");
+    position: relative;
+    right: 295px;
+    bottom: 186px;
+  }
 }
 
 .fps-wrapper {
