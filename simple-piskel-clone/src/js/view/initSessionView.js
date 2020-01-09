@@ -1,5 +1,6 @@
 import { setPixelSize } from '../utils.js';
 import loadMiniFrames from './loadMiniFrames.js';
+import initPreview from '../controller/preview/initPreview.js';
 
 export default function initSessionView({
   currentTool,
@@ -41,4 +42,5 @@ export default function initSessionView({
   });
 
   loadMiniFrames(frames, currentFrame, canvasData);
+  initPreview();
 }

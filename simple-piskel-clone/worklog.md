@@ -9,6 +9,7 @@
 | Jan 07 17:00 | Jan 07 21:00 | 4h         | create frames, model refactor                  |
 | Jan 08 14:00 | Jan 08 18:00 | 4h         | frames copy, delete, select                    |
 | Jan 08 21:00 | Jan 08 23:30 | 2.5h       | frames move + fix bug with empty canvas stroke |
-| Jan 09 13:00 | Jan 09 14:30 | 1.5h       | bug fixing, minor html/css changes             |
+| Jan 09 13:00 | Jan 09 15:00 | 2h         | bug fixing, minor html/css changes             |
+| Jan 09 15:00 | Jan 09       |            |                                                |
 | ---          | ---          | ---        | ---                                            |
 | Jan 04       | Jan          | 0h         | total                                          |

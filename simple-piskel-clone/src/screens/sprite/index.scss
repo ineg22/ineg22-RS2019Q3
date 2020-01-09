@@ -436,10 +436,13 @@ body {
 }
 
 .result {
+  position: relative;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   min-width: 200px;
+  max-width: 200px;
   height: 100%;
   margin-right: 20px;
 }
@@ -452,7 +455,22 @@ body {
   width: 100%;
   height: 200px;
 
-  background-color: darkgrey;
+  background: url("./assets/canvas-background.png");
+}
+
+.preview-canvas {
+  width: 100%;
+  height: 200px;
+}
+
+.play-pause {
+  position: absolute;
+
+  padding: 3px;
+
+  border: 1px solid rgb(255, 215, 0);
+  border-radius: 3px;
+  cursor: pointer;
 }
 
 .fps-wrapper {

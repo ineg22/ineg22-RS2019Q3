@@ -57,6 +57,8 @@ export default function initControls() {
   window.addEventListener('beforeunload', () => {
     const canvas = document.querySelector('#main-frame');
     localStorage.setItem('canvasData', JSON.stringify(canvas.toDataURL()));
+    localStorage.removeItem('tempFrame');
+    localStorage.removeItem('intervalID');
   });
 
   initCanvasListeners();
