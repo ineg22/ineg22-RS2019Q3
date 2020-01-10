@@ -4,4 +4,4 @@ import initControls from '../../js/controller/initControls.js';
 
 const sessionData = getSessionData();
 initSessionView(sessionData);
-initControls(sessionData);
+initControls();

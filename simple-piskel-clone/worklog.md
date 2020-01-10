@@ -11,5 +11,7 @@
 | Jan 08 21:00 | Jan 08 23:30 | 2.5h       | frames move + fix bug with empty canvas stroke |
 | Jan 09 13:00 | Jan 09 15:00 | 2h         | bug fixing, minor html/css changes             |
 | Jan 09 16:00 | Jan 09 19:00 | 3h         | preview animation + full screen + fps          |
+| Jan 10 14:30 | Jan 10 16:00 | 1.5h       | add shortcuts                                  |
+| Jan 10 16:00 | Jan 10 18:30 | 2.5h       | add ability to change shortcuts                |
 | ---          | ---          | ---        | ---                                            |
 | Jan 04       | Jan          | 0h         | total                                          |

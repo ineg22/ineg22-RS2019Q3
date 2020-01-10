@@ -5,11 +5,11 @@ export default function renderMiniFrame(count) {
 
   const cloneElement = document.createElement('div');
   cloneElement.classList.add('mini-frame__clone');
-  cloneElement.setAttribute('title', 'click to copy frame');
+  cloneElement.setAttribute('title', 'click "C" to copy frame');
 
   const deleteElement = document.createElement('div');
   deleteElement.classList.add('mini-frame__delete');
-  deleteElement.setAttribute('title', 'click to delete frame');
+  deleteElement.setAttribute('title', 'click "D" to delete frame');
 
   const dragndropElement = document.createElement('div');
   dragndropElement.classList.add('mini-frame__dragndrop');
