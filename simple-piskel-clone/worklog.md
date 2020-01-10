@@ -16,5 +16,6 @@
 | Jan 10 18:30 | Jan 10 19:00 | 0.5h       | add 2 utils tests                              |
 | Jan 10 20:00 | Jan 10 20:30 | 0.5h       | export apng                                    |
 | Jan 10 20:30 | Jan 10 23:00 | 3h         | export gif                                     |
+| Jan 10 23:30 | Jan 11 1:00  | 2h         | firebase google auth                           |
 | ---          | ---          | ---        | ---                                            |
 | Jan 04       | Jan          | 0h         | total                                          |

@@ -8,6 +8,7 @@ import onMiniFrameAddHandler from './UI/onMiniFrameAddHandler.js';
 import onMiniFrameClickHandler from './UI/miniFrame/onMiniFrameClickHandler.js';
 import onShortcutClickHandler from './UI/shortcut/onShortcutClickHandler.js';
 import onKeyPressHandler from './UI/onKeyPressHandler.js';
+import onLoginClickHandler from './UI/onLoginClickHandler.js';
 import onAPNGExportClickHandler from './UI/export/onAPNGExportClickHandler.js';
 import onGIFExportClickHandler from './UI/export/onGIFExportClickHandler.js';
 import fullScreenHandler from './preview/fullScreenHandler.js';
@@ -58,6 +59,9 @@ export default function initControls() {
   document
     .querySelector('.export-gif')
     .addEventListener('click', onGIFExportClickHandler);
+  document
+    .querySelector('.login')
+    .addEventListener('click', onLoginClickHandler);
 
   document.addEventListener('dragstart', onDragStartHandler);
   document.addEventListener('dragover', onDragOverHandler);

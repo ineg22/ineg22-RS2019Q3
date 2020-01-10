@@ -14,10 +14,14 @@ export default function shortcutChangeHandler(e) {
     document.removeEventListener('keypress', keyPressWait);
     target.classList.remove('over');
     newKey = evt.code;
-    target.textContent = newKey.toUpperCase().slice(-1);
+    const newText = newKey.toUpperCase().slice(-1);
+    target.textContent = newText;
 
     Object.keys(currentShortcuts).forEach(key => {
-      if (currentShortcuts[key] === newKey) {
+      const pressedEl = target.closest('.cheatsheet__list-item');
+      const currEl = document.querySelector(`.${key}-shortcut`);
+
+      if (currentShortcuts[key] === newKey && pressedEl !== currEl) {
         const repeatedEl = document
           .querySelector(`.${key}-shortcut`)
           .querySelector('.cheatsheet__short');
