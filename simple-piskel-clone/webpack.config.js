@@ -1,6 +1,7 @@
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -56,5 +57,11 @@ module.exports = {
       chunks: ['app'],
       favicon: './src/screens/sprite/assets/favicon-sprite.png',
     }),
+    new CopyWebpackPlugin([
+      {
+        from: './node_modules/gif.js-upgrade/dist/gif.worker.js',
+        to: './',
+      },
+    ]),
   ],
 };

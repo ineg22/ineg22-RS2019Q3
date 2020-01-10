@@ -1,5 +1,5 @@
-const UPNG = require('upng-js');
-const download = require('downloadjs');
+import UPNG from 'upng-js';
+import download from 'downloadjs';
 
 export default function onAPNGExportClickHandler() {
   const DEFAULT_CANVAS_SIZE = 512;

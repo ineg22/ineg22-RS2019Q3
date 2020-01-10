@@ -42,6 +42,7 @@
   },
   "dependencies": {
     "downloadjs": "^1.4.7",
+    "gif.js-upgrade": "^0.2.1",
     "upng-js": "^2.1.0"
   }
 }
