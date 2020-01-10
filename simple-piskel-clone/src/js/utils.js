@@ -1,4 +1,8 @@
 export function convertHex(hex) {
+  if (!hex || typeof hex !== 'string' || hex.length !== 7) {
+    throw new Error('invalid arguments');
+  }
+
   const newHex = hex.replace('#', '');
   const red = parseInt(newHex.substring(0, 2), 16);
   const green = parseInt(newHex.substring(2, 4), 16);

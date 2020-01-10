@@ -4,10 +4,16 @@
   "description": "simple-piskel-clone",
   "main": "app.js",
   "scripts": {
-    "test": "jest src/test/test.js",
+    "test": "jest src/test/utils.test.js",
     "lint": "eslint src/js",
     "build": "webpack",
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server",
+    "coverage:full": "jest --coverage --coverage-reporters=lcov"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/js/**/*.js"
+    ]
   },
   "author": "Evgeny Ivanov <ineg22@gmail.com>",
   "license": "MIT",
