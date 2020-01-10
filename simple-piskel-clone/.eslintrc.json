@@ -7,8 +7,6 @@
   "plugins": ["prettier", "jest"],
   "rules": {
     "prettier/prettier": ["error"],
-    "import/extensions": ["error", "always", {
-      "ignorePackages": true
-    }]
+    "import/extensions": true
   }
 }

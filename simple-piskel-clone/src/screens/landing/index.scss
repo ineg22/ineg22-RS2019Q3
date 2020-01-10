@@ -10,7 +10,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 5vh;
+  height: 20px;
   padding: 10px 30px;
 }
 
@@ -31,16 +31,118 @@ body {
 }
 
 .main {
-  height: 80vh;
+  margin-bottom: 80px;
   margin-left: 30px;
 }
 
+.description {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.examples__head,
+.functionality__head,
+.description__head {
+  margin-bottom: 20px;
+
+  text-align: center;
+  color: rgb(255, 215, 0);
+  text-transform: uppercase;
+}
+
+.description__text {
+  display: inline-block;
+}
+
+.description__image {
+  display: inline-block;
+  width: 500px;
+  height: 250px;
+
+  background: url("./assets/overview.png");
+  background-size: cover;
+}
+
+.examples__promo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 200px;
+}
+
+.examples__item {
+  width: 100px;
+  height: 100px;
+  margin: 5px;
+
+  background-color: black;
+}
+
+.example {
+  background: url("./assets/example1.gif");
+  background-size: cover;
+}
+
+.example5 {
+  background: url("./assets/example2.gif");
+  background-size: cover;
+}
+
+.example4 {
+  background: url("./assets/example3.gif");
+  background-size: cover;
+}
+
+.example3 {
+  background: url("./assets/example4.gif");
+  background-size: cover;
+}
+
+.example2 {
+  background: url("./assets/example5.gif");
+  background-size: cover;
+}
+
+.example6 {
+  background: url("./assets/example6.gif");
+  background-size: cover;
+}
+
+.functionality-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+  list-style: none;
+}
+
+.functionality-item {
+  width: 40%;
+}
+
+.functionality-item__head {
+  color: rgb(255, 215, 0);
+}
+
 .footer {
-  height: 5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20px;
+}
+
+.contact-mail {
+  margin: 2px;
+
+  color: white;
+  text-decoration: none;
 }
 
 .contact-link {
-  float: right;
   margin: 10px;
   padding: 2px 5px;
 
@@ -54,5 +156,11 @@ body {
 
   &:hover {
     background-color: rgb(255, 215, 0);
+  }
+}
+
+@media (max-width: 570px) {
+  .description__image {
+    width: 100%;
   }
 }
