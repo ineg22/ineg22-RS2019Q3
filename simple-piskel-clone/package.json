@@ -39,5 +39,9 @@
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.10.1"
+  },
+  "dependencies": {
+    "downloadjs": "^1.4.7",
+    "upng-js": "^2.1.0"
   }
 }
