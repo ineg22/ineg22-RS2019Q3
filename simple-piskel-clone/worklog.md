@@ -19,4 +19,4 @@
 | Jan 10 23:30 | Jan 11 1:00  | 2h         | firebase google auth                           |
 | Jan 11 1:00  | Jan 11 2:00  | 1h         | landing page filling                           |
 | ---          | ---          | ---        | ---                                            |
-| Jan 04       | Jan          | 0h         | total                                          |
+| Jan 04       | Jan 11       | 39h        | total                                          |
