@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>new sprite</title>
+</head>
+
+<body>
+  <div class="cheatsheet hidden">
+    <div class="cheatsheet__container">
+      <div class="cheatsheet__head"><span>Shortcut cheatsheet</span>
+        <div class="cheatsheet__close">X</div>
+      </div>
+      <div class="cheatsheet__body">
+        <ul class="cheatsheet__list">
+          <li class="cheatsheet__list-item pen-shortcut">
+            <div class="cheatsheet__short" title="click to change shortcut">P</div><span>Pen
+              tool</span>
+          </li>
+          <li class="cheatsheet__list-item stroke-shortcut">
+            <div class="cheatsheet__short" title="click to change shortcut">T</div><span>Draw
+              stroke tool</span>
+          </li>
+          <li class="cheatsheet__list-item bucket-shortcut">
+            <div class="cheatsheet__short" title="click to change shortcut">B</div><span>Fill
+              bucket tool</span>
+          </li>
+          <li class="cheatsheet__list-item unicolor-shortcut">
+            <div class="cheatsheet__short" title="click to change shortcut">U</div><span>Unicolor
+              tool</span>
+          </li>
+          <li class="cheatsheet__list-item eraser-shortcut">
+            <div class="cheatsheet__short" title="click to change shortcut">E</div><span>Eraser tool</span>
+          </li>
+          <li class="cheatsheet__list-item picker-shortcut">
+            <div class="cheatsheet__short" title="click to change shortcut">O</div><span>Color
+              picker tool</span>
+          </li>
+          <li class="cheatsheet__list-item fullscreen-shortcut">
+            <div class="cheatsheet__short" title="click to change shortcut">F</div><span>Preview fullscreen</span>
+          </li>
+          <li class="cheatsheet__list-item swap-colors-shortcut">
+            <div class="cheatsheet__short" title="click to change shortcut">S</div><span>Swap
+              colors</span>
+          </li>
+          <li class="cheatsheet__list-item color-input-shortcut">
+            <div class="cheatsheet__short" title="click to change shortcut">L</div><span>Select new color from
+              input</span>
+          </li>
+          <li class="cheatsheet__list-item mini-frame__add-shortcut">
+            <div class="cheatsheet__short" title="click to change shortcut">N</div><span>add
+              new frame</span>
+          </li>
+          <li class="cheatsheet__list-item mini-frame__clone-shortcut">
+            <div class="cheatsheet__short" title="click to change shortcut">C</div><span>clone
+              current frame</span>
+          </li>
+          <li class="cheatsheet__list-item mini-frame__delete-shortcut">
+            <div class="cheatsheet__short" title="click to change shortcut">D</div><span>delete
+              current frame</span>
+          </li>
+          <li class="cheatsheet__list-item export-apng-shortcut">
+            <div class="cheatsheet__short" title="click to change shortcut">A</div><span>Export APNG</span>
+          </li>
+          <li class="cheatsheet__list-item export-gif-shortcut">
+            <div class="cheatsheet__short" title="click to change shortcut">G</div><span>Export GIF</span>
+          </li>
+          <li class="cheatsheet__list-item pen-size-1-shortcut">
+            <div class="cheatsheet__short" title="click to change shortcut">1</div><span>set
+              pixel size to 1px</span>
+          </li>
+          <li class="cheatsheet__list-item pen-size-2-shortcut">
+            <div class="cheatsheet__short" title="click to change shortcut">2</div><span>set
+              pixel size to 2px</span>
+          </li>
+          <li class="cheatsheet__list-item pen-size-3-shortcut">
+            <div class="cheatsheet__short" title="click to change shortcut">3</div><span>set
+              pixel size to 3px</span>
+          </li>
+          <li class="cheatsheet__list-item pen-size-4-shortcut">
+            <div class="cheatsheet__short" title="click to change shortcut">4</div><span>set
+              pixel size to 4px</span>
+          </li>
+      </div>
+    </div>
+  </div>
+  <header class="header">
+    <h2>PISKEL</h2>
+    <span>new sprite*</span>
+    <div class="links">
+      <div class="user-info hidden">
+        <div class="user-info__photo"></div>
+        <span class="user-info__user-name">evgeny ivanov</span>
+      </div>
+      <div class="header-link login" draggable="false">log in</div>
+      <a href="./" class="header-link" draggable="false">landing</a>
+    </div>
+  </header>
+  <main class="main">
+    <div class="tools">
+      <ul class="pixel-list">
+        <li class="pixel-item pen-size-1" title="click '1' to set pixel size 1px">
+          <div class="pixel-1"></div>
+        </li>
+        <li class="pixel-item pen-size-2" title="click '2' to set pixel size 2px">
+          <div class="pixel-2"></div>
+        </li>
+        <li class="pixel-item pen-size-3" title="click '3' to set pixel size 3px">
+          <div class="pixel-3"></div>
+        </li>
+        <li class="pixel-item pen-size-4" title="click '4' to set pixel size 4px">
+          <div class="pixel-4"></div>
+        </li>
+      </ul>
+      <ul class="tools-list">
+        <li class="tools-item pen" title="click 'P' to select pen tool"></li>
+        <li class="tools-item stroke" title="click 'S' to select stroke tool"></li>
+        <li class="tools-item bucket" title="click 'B' to select bucket tool"></li>
+        <li class="tools-item unicolor" title="click 'U' to select unicolor tool"></li>
+        <li class="tools-item eraser" title="click 'E' to select eraser tool"></li>
+        <li class="tools-item picker" title="click 'C' to select color picker tool"></li>
+      </ul>
+      <div class="color-tools">
+        <input type="color" id="color-input" class="color-input">
+        <label for="color-input" title="click 'L' to select color">
+          <div class="current-color"></div>
+        </label>
+        <div class="prev-color" title="click 'S' to swap colors"></div>
+        <div class="swap-colors" title="click 'S' to swap colors"></div>
+      </div>
+      <div class="keyboard-shortcuts"></div>
+    </div>
+    <div class="frames">
+      <ul class="mini-frame-list">
+        <div id="mini-frame__add" class="mini-frame__add" title="click to add new frame">
+          <div class="mini-frame__add-icon"></div>
+          <span>Add new frame</span>
+        </div>
+      </ul>
+    </div>
+    <div class="work-area">
+      <canvas id="main-frame" class="main-frame" width="512" height="512"></canvas>
+    </div>
+    <div class="result">
+      <div class="preview">
+        <div class="fullscreen" title="click 'F' to watch preview in fullscreen"></div>
+        <canvas id="preview-canvas" class="preview-canvas" width="512" height="512"></canvas>
+      </div>
+      <h4 class="result-headers">preview fps</h4>
+      <div class="fps-wrapper">
+        <span id="fps-display" class="fps-display">2 FPS</span>
+        <input id="fps-input" class="fps-input" type="range" min="1" max="24" value="2">
+      </div>
+      <h4 class="result-headers">sprite resolution</h4>
+      <div class="resolution-wrapper">
+        <div class="resolution-item resolution-32" title="be care! you will lose all data">32x32</div>
+        <div class="resolution-item resolution-64" title="be care! you will lose all data">64x64</div>
+        <div class="resolution-item resolution-128" title="be care! you will lose all data">128x128</div>
+      </div>
+      <h4 class="result-headers">export</h4>
+      <div class="export-wrapper">
+        <div class="export-item export-apng" title="click 'A' to export APNG">apng</div>
+        <div class="export-item export-gif" title="click 'G' to export GIF">gif</div>
+      </div>
+    </div>
+  </main>
+</body>
+
+</html>
